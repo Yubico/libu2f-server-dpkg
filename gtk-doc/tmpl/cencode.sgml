@@ -1,0 +1,70 @@
+<!-- ##### SECTION Title ##### -->
+cencode
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### SECTION Image ##### -->
+
+
+<!-- ##### ENUM base64_encodestep ##### -->
+<para>
+
+</para>
+
+@step_A: 
+@step_B: 
+@step_C: 
+
+<!-- ##### FUNCTION base64_init_encodestate ##### -->
+<para>
+
+</para>
+
+@state_in: 
+
+
+<!-- ##### FUNCTION base64_encode_value ##### -->
+<para>
+
+</para>
+
+@value_in: 
+@Returns: 
+
+
+<!-- ##### FUNCTION base64_encode_block ##### -->
+<para>
+
+</para>
+
+@plaintext_in: 
+@length_in: 
+@code_out: 
+@state_in: 
+@Returns: 
+
+
+<!-- ##### FUNCTION base64_encode_blockend ##### -->
+<para>
+
+</para>
+
+@code_out: 
+@state_in: 
+@Returns: 
+
+

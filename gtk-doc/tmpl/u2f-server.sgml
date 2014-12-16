@@ -1,0 +1,280 @@
+<!-- ##### SECTION Title ##### -->
+u2f-server
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### SECTION Image ##### -->
+
+
+<!-- ##### MACRO U2FS_CHALLENGE_RAW_LEN ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO U2FS_CHALLENGE_B64U_LEN ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO U2FS_PUBLIC_KEY_LEN ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO U2FS_COUNTER_LEN ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### ENUM u2fs_rc ##### -->
+<para>
+
+</para>
+
+@U2FS_OK: 
+@U2FS_MEMORY_ERROR: 
+@U2FS_JSON_ERROR: 
+@U2FS_BASE64_ERROR: 
+@U2FS_CRYPTO_ERROR: 
+@U2FS_ORIGIN_ERROR: 
+@U2FS_CHALLENGE_ERROR: 
+@U2FS_SIGNATURE_ERROR: 
+@U2FS_FORMAT_ERROR: 
+
+<!-- ##### ENUM u2fs_initflags ##### -->
+<para>
+
+</para>
+
+@U2FS_DEBUG: 
+
+<!-- ##### TYPEDEF u2fs_ctx_t ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### TYPEDEF u2fs_reg_res_t ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### TYPEDEF u2fs_auth_res_t ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION u2fs_global_init ##### -->
+<para>
+
+</para>
+
+@flags: 
+@Returns: 
+
+
+<!-- ##### FUNCTION u2fs_global_done ##### -->
+<para>
+
+</para>
+
+@void: 
+
+
+<!-- ##### FUNCTION u2fs_strerror ##### -->
+<para>
+
+</para>
+
+@err: 
+@Returns: 
+
+
+<!-- ##### FUNCTION u2fs_strerror_name ##### -->
+<para>
+
+</para>
+
+@err: 
+@Returns: 
+
+
+<!-- ##### FUNCTION u2fs_init ##### -->
+<para>
+
+</para>
+
+@ctx: 
+@Returns: 
+
+
+<!-- ##### FUNCTION u2fs_done ##### -->
+<para>
+
+</para>
+
+@ctx: 
+
+
+<!-- ##### FUNCTION u2fs_set_origin ##### -->
+<para>
+
+</para>
+
+@ctx: 
+@origin: 
+@Returns: 
+
+
+<!-- ##### FUNCTION u2fs_set_appid ##### -->
+<para>
+
+</para>
+
+@ctx: 
+@appid: 
+@Returns: 
+
+
+<!-- ##### FUNCTION u2fs_set_challenge ##### -->
+<para>
+
+</para>
+
+@ctx: 
+@challenge: 
+@Returns: 
+
+
+<!-- ##### FUNCTION u2fs_set_keyHandle ##### -->
+<para>
+
+</para>
+
+@ctx: 
+@keyHandle: 
+@Returns: 
+
+
+<!-- ##### FUNCTION u2fs_set_publicKey ##### -->
+<para>
+
+</para>
+
+@ctx: 
+@publicKey: 
+@Returns: 
+
+
+<!-- ##### FUNCTION u2fs_registration_challenge ##### -->
+<para>
+
+</para>
+
+@ctx: 
+@output: 
+@Returns: 
+
+
+<!-- ##### FUNCTION u2fs_registration_verify ##### -->
+<para>
+
+</para>
+
+@ctx: 
+@response: 
+@output: 
+@Returns: 
+
+
+<!-- ##### FUNCTION u2fs_get_registration_keyHandle ##### -->
+<para>
+
+</para>
+
+@result: 
+@Returns: 
+
+
+<!-- ##### FUNCTION u2fs_get_registration_publicKey ##### -->
+<para>
+
+</para>
+
+@result: 
+@Returns: 
+
+
+<!-- ##### FUNCTION u2fs_free_reg_res ##### -->
+<para>
+
+</para>
+
+@result: 
+
+
+<!-- ##### FUNCTION u2fs_authentication_challenge ##### -->
+<para>
+
+</para>
+
+@ctx: 
+@output: 
+@Returns: 
+
+
+<!-- ##### FUNCTION u2fs_authentication_verify ##### -->
+<para>
+
+</para>
+
+@ctx: 
+@response: 
+@output: 
+@Returns: 
+
+
+<!-- ##### FUNCTION u2fs_get_authentication_result ##### -->
+<para>
+
+</para>
+
+@result: 
+@verified: 
+@counter: 
+@user_presence: 
+@Returns: 
+
+
+<!-- ##### FUNCTION u2fs_free_auth_res ##### -->
+<para>
+
+</para>
+
+@result: 
+
+
