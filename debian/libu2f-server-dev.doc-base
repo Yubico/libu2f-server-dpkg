@@ -1,0 +1,12 @@
+Document: u2f-server
+Title: Universal 2nd Factor C Library API Manual
+Author: Alessio Di Mauro, Simon Josefsson
+Abstract: U2F Server C Library Reference Manual
+Section: Programming/C
+
+Format: PDF
+Files: /usr/share/doc/libu2f-server-dev/u2f-server.pdf
+
+Format: HTML
+Index: /usr/share/gtk-doc/html/u2f-server/index.html
+Files: /usr/share/gtk-doc/html/u2f-server/*.html
