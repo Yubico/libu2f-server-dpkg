@@ -1,0 +1,5 @@
+libu2f-server (0.0.0-1) unstable; urgency=medium
+
+  * Initial release. (Closes: #XXXXXX)
+
+ -- Alessio Di Mauro <adma@yubico.com>  Tue, 16 Dec 2014 15:46:04 +0100
