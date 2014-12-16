@@ -14,4 +14,4 @@ override_dh_auto_clean:
 	test -f Makefile && dh_auto_clean || true
 
 override_dh_compress:
-	dh_compress -Xu2f-host.pdf
+	dh_compress -Xu2f-server.pdf
