@@ -1,0 +1,61 @@
+<!-- ##### SECTION Title ##### -->
+cdecode
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### SECTION Image ##### -->
+
+
+<!-- ##### ENUM base64_decodestep ##### -->
+<para>
+
+</para>
+
+@step_a: 
+@step_b: 
+@step_c: 
+@step_d: 
+
+<!-- ##### FUNCTION base64_init_decodestate ##### -->
+<para>
+
+</para>
+
+@state_in: 
+
+
+<!-- ##### FUNCTION base64_decode_value ##### -->
+<para>
+
+</para>
+
+@value_in: 
+@Returns: 
+
+
+<!-- ##### FUNCTION base64_decode_block ##### -->
+<para>
+
+</para>
+
+@code_in: 
+@length_in: 
+@plaintext_out: 
+@state_in: 
+@Returns: 
+
+

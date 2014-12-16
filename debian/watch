@@ -1,3 +1,0 @@
-version=3
-opts=pgpsigurlmangle=s/$/.sig/ \
-  https://developers.yubico.com/libu2f-server/Releases libu2f-server-(.*)\.tar\.xz

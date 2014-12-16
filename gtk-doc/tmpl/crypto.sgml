@@ -1,0 +1,162 @@
+<!-- ##### SECTION Title ##### -->
+crypto
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### SECTION Image ##### -->
+
+
+<!-- ##### FUNCTION dumpCert ##### -->
+<para>
+
+</para>
+
+@certificate: 
+
+
+<!-- ##### FUNCTION crypto_init ##### -->
+<para>
+
+</para>
+
+@void: 
+
+
+<!-- ##### FUNCTION crypto_release ##### -->
+<para>
+
+</para>
+
+@void: 
+
+
+<!-- ##### FUNCTION free_key ##### -->
+<para>
+
+</para>
+
+@key: 
+
+
+<!-- ##### FUNCTION free_cert ##### -->
+<para>
+
+</para>
+
+@cert: 
+
+
+<!-- ##### FUNCTION free_sig ##### -->
+<para>
+
+</para>
+
+@sig: 
+
+
+<!-- ##### FUNCTION set_random_bytes ##### -->
+<para>
+
+</para>
+
+@data: 
+@len: 
+@Returns: 
+
+
+<!-- ##### FUNCTION decode_X509 ##### -->
+<para>
+
+</para>
+
+@data: 
+@len: 
+@cert: 
+@Returns: 
+
+
+<!-- ##### FUNCTION decode_ECDSA ##### -->
+<para>
+
+</para>
+
+@data: 
+@len: 
+@sig: 
+@Returns: 
+
+
+<!-- ##### FUNCTION decode_user_key ##### -->
+<para>
+
+</para>
+
+@data: 
+@key: 
+@Returns: 
+
+
+<!-- ##### FUNCTION verify_ECDSA ##### -->
+<para>
+
+</para>
+
+@dgst: 
+@dgst_len: 
+@sig: 
+@eckey: 
+@Returns: 
+
+
+<!-- ##### FUNCTION extract_EC_KEY_from_X509 ##### -->
+<para>
+
+</para>
+
+@cert: 
+@key: 
+@Returns: 
+
+
+<!-- ##### FUNCTION dup_key ##### -->
+<para>
+
+</para>
+
+@key: 
+@Returns: 
+
+
+<!-- ##### FUNCTION dup_cert ##### -->
+<para>
+
+</para>
+
+@cert: 
+@Returns: 
+
+
+<!-- ##### FUNCTION dump_user_key ##### -->
+<para>
+
+</para>
+
+@key: 
+@output: 
+@Returns: 
+
+

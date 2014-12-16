@@ -1,0 +1,179 @@
+2014-11-25  Alessio Di Mauro <alessio@yubico.com>
+
+	* NEWS: Release 0.0.0.
+
+2014-11-25  Alessio Di Mauro <alessio@yubico.com>
+
+	* tests/Makefile.am: Added TESTS_ENVIRONMENT as well as
+	AS_TESTS_ENVIRONMENT.
+
+2014-11-25  Alessio Di Mauro <alessio@yubico.com>
+
+	* u2f-server/core.c: Fixed json_object_object checks.
+
+2014-11-25  Alessio Di Mauro <alessio@yubico.com>
+
+	* tests/u2f-server-test.sh: Cleaned up test script.
+
+2014-11-25  Alessio Di Mauro <alessio@yubico.com>
+
+	* tests/Makefile.am, tests/u2f-server-test.sh, tests/u2f-server.sh: 
+	Renamed u2f-server test script.  Fixed distcheck.
+
+2014-11-24  Alessio Di Mauro <alessio@yubico.com>
+
+	* tests/u2f-server.sh: Added more self tests.
+
+2014-11-24  Alessio Di Mauro <alessio@yubico.com>
+
+	* src/u2f-server.c, u2f-server/core.c: Fixed counter representation.
+	Indent.
+
+2014-11-24  Alessio Di Mauro <alessio@yubico.com>
+
+	* tests/u2f-server.sh: Extended self-testing script.
+
+2014-11-24  Alessio Di Mauro <alessio@yubico.com>
+
+	* src/u2f-server.c: Moved error output to stderr.
+
+2014-11-24  Alessio Di Mauro <alessio@yubico.com>
+
+	* src/u2f-server.c: Fixed read.
+
+2014-11-21  Alessio Di Mauro <alessio@yubico.com>
+
+	* tests/Makefile.am, tests/u2f-server.sh: Started scripting test.
+
+2014-11-20  Alessio Di Mauro <alessio@yubico.com>
+
+	* README: More AsciiDoc formatting.
+
+2014-11-20  Simon Josefsson <simon@josefsson.org>
+
+	* configure.ac: Drop useless warning.
+
+2014-11-20  Alessio Di Mauro <alessio@yubico.com>
+
+	* README, README.adoc: Symlink.
+
+2014-11-20  Alessio Di Mauro <alessio@yubico.com>
+
+	* README.adoc: Reformatted README to AsciiDoc.
+
+2014-11-20  Alessio Di Mauro <alessio@yubico.com>
+
+	* configure.ac, u2f-server/core.c: Added workaround for
+	json_object_object_get_ex.
+
+2014-11-20  Alessio Di Mauro <alessio@yubico.com>
+
+	* u2f-server/internal.h: Add stdlib.
+
+2014-11-19  Alessio Di Mauro <alessio@yubico.com>
+
+	* src/u2f-server.c: Fail hard if registration is unsuccessful.
+
+2014-11-19  Alessio Di Mauro <alessio@yubico.com>
+
+	* src/u2f-server.c, tests/core.c, u2f-server/core.c,
+	u2f-server/crypto.h, u2f-server/openssl.c: Indent.
+
+2014-11-19  Alessio Di Mauro <alessio@yubico.com>
+
+	* tests/core.c: Removed unused variables.
+
+2014-11-19  Alessio Di Mauro <alessio@yubico.com>
+
+	* src/u2f-server.c: Added fread check.
+
+2014-11-19  Alessio Di Mauro <alessio@yubico.com>
+
+	* src/u2f-server.c: Removed more warnings.
+
+2014-11-19  Alessio Di Mauro <alessio@yubico.com>
+
+	* u2f-server/core.c, u2f-server/crypto.h, u2f-server/openssl.c: More
+	signedness and type consistency.
+
+2014-11-19  Alessio Di Mauro <alessio@yubico.com>
+
+	* u2f-server/openssl.c: Included x509v3.
+
+2014-11-19  Alessio Di Mauro <alessio@yubico.com>
+
+	* u2f-server/core.c: Removed unused variable.
+
+2014-11-19  Alessio Di Mauro <alessio@yubico.com>
+
+	* u2f-server/core.c: signedness.
+
+2014-11-19  Alessio Di Mauro <alessio@yubico.com>
+
+	* u2f-server/core.c: Signedness and type consistency.
+
+2014-11-19  Alessio Di Mauro <alessio@yubico.com>
+
+	* u2f-server/core.c: moved declaration.
+
+2014-11-19  Alessio Di Mauro <alessio@yubico.com>
+
+	* u2f-server/core.c: Changed user_public_key to unsigned.
+
+2014-11-19  Alessio Di Mauro <alessio@yubico.com>
+
+	* u2f-server/core.c: Fixed ambiguous else.
+
+2014-11-19  Alessio Di Mauro <alessio@yubico.com>
+
+	* u2f-server/core.c: Added ugly casts (to be removed).
+
+2014-11-19  Alessio Di Mauro <alessio@yubico.com>
+
+	* u2f-server/core.c: Removed unused func.
+
+2014-11-19  Alessio Di Mauro <alessio@yubico.com>
+
+	* u2f-server/core.c: Removed unused var.
+
+2014-11-19  Alessio Di Mauro <alessio@yubico.com>
+
+	* u2f-server/core.c: cast for dumpHex.
+
+2014-11-19  Alessio Di Mauro <alessio@yubico.com>
+
+	* u2f-server/crypto.h, u2f-server/openssl.c: 
+	decode_user_key_signature changed.
+
+2014-11-19  Alessio Di Mauro <alessio@yubico.com>
+
+	* u2f-server/core.c: encode_b64 signature.
+
+2014-11-19  Alessio Di Mauro <alessio@yubico.com>
+
+	* u2f-server/version.c: Made my_strverscmp static.
+
+2014-11-19  Simon Josefsson <simon@josefsson.org>
+
+	* .travis.yml: Add.
+
+2014-11-19  Simon Josefsson <simon@josefsson.org>
+
+	* build-aux/travis: Chmod.
+
+2014-11-19  Simon Josefsson <simon@josefsson.org>
+
+	* u2f-server/u2f-server.pc.in: Httpsify.
+
+2014-11-19  Simon Josefsson <simon@josefsson.org>
+
+	* .travis.yml, build-aux/travis: Add travis builds.
+
+2014-11-18  Simon Josefsson <simon@josefsson.org>
+
+	* .gitignore: Ignore more.
+
+2014-11-18  Simon Josefsson <simon@josefsson.org>
+
+	* First commit.
+
