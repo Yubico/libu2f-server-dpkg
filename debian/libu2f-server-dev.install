@@ -2,4 +2,3 @@ usr/lib/*/libu2f-server.so
 usr/lib/*/libu2f-server.a
 usr/lib/*/pkgconfig
 usr/include/u2f-server
-gtk-doc/u2f-server.pdf
