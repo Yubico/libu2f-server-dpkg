@@ -1,4 +1,4 @@
-libu2f-server (0.0.0-1) utopic; urgency=medium
+libu2f-server (0.0.0-2) utopic; urgency=medium
 
   * Initial release. (Closes: #XXXXXX)
 
