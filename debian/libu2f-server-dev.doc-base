@@ -1,5 +1,5 @@
 Document: u2f-server
-Title: Universal 2nd Factor C Library API Manual
+Title: Universal 2nd Factor Server C Library API Manual
 Author: Alessio Di Mauro, Simon Josefsson
 Abstract: U2F Server C Library Reference Manual
 Section: Programming/C

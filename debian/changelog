@@ -1,5 +1,5 @@
-libu2f-server (0.0.0-3~ppa1~vivid1) vivid; urgency=medium
+libu2f-server (0.0.0-1) unstable; urgency=medium
 
-  * Initial release. (Closes: #XXXXXX)
+  * Initial release. (Closes: #775597)
 
- -- Alessio Di Mauro <alessio@yubico.com>  Tue, 16 Dec 2014 15:46:04 +0100
+ -- Simon Josefsson <simon@josefsson.org>  Sat, 17 Jan 2015 21:40:07 +0100

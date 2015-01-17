@@ -4,21 +4,30 @@ Source: https://developers.yubico.com/libu2f-server/
 
 Files: *
 Copyright: Copyright (c) 2014 Yubico AB
-All rights reserved.
-License: BSD
-
+License: BSD-2-clause
+ Quoting README on licensing:
+ .
+ The project is licensed under a BSD license. See the file COPYING for
+ exact wording. For any copyright year range specified as YYYY-ZZZZ in
+ this package note that the range specifies every single year in that
+ closed interval.
+ .
+ Quoting COPYING:
+ .
+ All rights reserved.
+ .
  Redistribution and use in source and binary forms, with or without
  modification, are permitted provided that the following conditions are
  met:
-
-  * Redistributions of source code must retain the above copyright
-    notice, this list of conditions and the following disclaimer.
-
-  * Redistributions in binary form must reproduce the above copyright
-    notice, this list of conditions and the following disclaimer in the
-    documentation and/or other materials provided with the
-    distribution.
-
+ .
+ * Redistributions of source code must retain the above copyright
+   notice, this list of conditions and the following disclaimer.
+ .
+ * Redistributions in binary form must reproduce the above copyright
+   notice, this list of conditions and the following disclaimer in the
+   documentation and/or other materials provided with the
+   distribution.
+ .
  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
  LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
@@ -31,22 +40,12 @@ License: BSD
  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-Files: u2f-server/b64/* u2f-server/{cencode.c,cdecode.c,sha256.c,sha256.h}
-Copyright: Copyright (C) 1995-2014 Free Software Foundation, Inc.
-License: GPL-3+
- This program is free software; you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation; either version 3, or (at your option)
- any later version.
+Files: u2f-server/b64/c??code.h u2f-server/c??code.c
+Copyright: public-domain
+License: public-domain
+ Quoting u2f-server/cencode.c:
  .
- This program is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
+ cencoder.c - c source to a base64 encoding algorithm implementation
  .
- You should have received a copy of the GNU General Public License
- along with this program; if not, see <http://www.gnu.org/licenses/>.  */
- .
- On Debian systems, the full text of the GNU General Public
- License version 3 can be found in the file
- `/usr/share/common-licenses/GPL-3'.
+ This is part of the libb64 project, and has been placed in the public domain.
+ For details, see http://sourceforge.net/projects/libb64
