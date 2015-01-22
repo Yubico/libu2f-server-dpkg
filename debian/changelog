@@ -1,5 +1,5 @@
-libu2f-server (0.0.0-1) unstable; urgency=medium
+libu2f-server (0.0.0-1) unstable; urgency=low
 
   * Initial release. (Closes: #775597)
 
- -- Simon Josefsson <simon@josefsson.org>  Sat, 17 Jan 2015 21:40:07 +0100
+ -- Alessio Di Mauro <alessio@yubico.com>  Thu, 22 Jan 2015 22:41:48 +0100
