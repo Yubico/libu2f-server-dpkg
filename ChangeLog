@@ -1,5 +1,9 @@
 2015-07-01  Alessio Di Mauro <alessio@yubico.com>
 
+	* configure.ac: Fixed LT version.
+
+2015-07-01  Alessio Di Mauro <alessio@yubico.com>
+
 	* NEWS, configure.ac: Version 1.0.0.
 
 2015-07-01  Alessio Di Mauro <alessio@yubico.com>

@@ -2219,9 +2219,9 @@ ac_configure="$SHELL $ac_aux_dir/configure"  # Please don't use this var.
 
 
 # http://www.gnu.org/s/libtool/manual/html_node/Updating-version-info.html
-LT_CURRENT=1
+LT_CURRENT=0
 
-LT_REVISION=0
+LT_REVISION=2
 
 LT_AGE=0
 
