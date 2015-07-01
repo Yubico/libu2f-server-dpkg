@@ -2,7 +2,6 @@
 <ANCHOR id="u2f-server-u2f-server" href="u2f-server/u2f-server-u2f-server.html">
 <ANCHOR id="u2f-server-u2f-server.functions" href="u2f-server/u2f-server-u2f-server.html#u2f-server-u2f-server.functions">
 <ANCHOR id="u2f-server-u2f-server.other" href="u2f-server/u2f-server-u2f-server.html#u2f-server-u2f-server.other">
-<ANCHOR id="u2f-server-u2f-server.object-hierarchy" href="u2f-server/u2f-server-u2f-server.html#u2f-server-u2f-server.object-hierarchy">
 <ANCHOR id="u2f-server-u2f-server.description" href="u2f-server/u2f-server-u2f-server.html#u2f-server-u2f-server.description">
 <ANCHOR id="u2f-server-u2f-server.functions_details" href="u2f-server/u2f-server-u2f-server.html#u2f-server-u2f-server.functions_details">
 <ANCHOR id="u2fs-global-init" href="u2f-server/u2f-server-u2f-server.html#u2fs-global-init">
@@ -38,7 +37,6 @@
 <ANCHOR id="u2f-server-u2f-server-version" href="u2f-server/u2f-server-u2f-server-version.html">
 <ANCHOR id="u2f-server-u2f-server-version.functions" href="u2f-server/u2f-server-u2f-server-version.html#u2f-server-u2f-server-version.functions">
 <ANCHOR id="u2f-server-u2f-server-version.other" href="u2f-server/u2f-server-u2f-server-version.html#u2f-server-u2f-server-version.other">
-<ANCHOR id="u2f-server-u2f-server-version.object-hierarchy" href="u2f-server/u2f-server-u2f-server-version.html#u2f-server-u2f-server-version.object-hierarchy">
 <ANCHOR id="u2f-server-u2f-server-version.description" href="u2f-server/u2f-server-u2f-server-version.html#u2f-server-u2f-server-version.description">
 <ANCHOR id="u2f-server-u2f-server-version.functions_details" href="u2f-server/u2f-server-u2f-server-version.html#u2f-server-u2f-server-version.functions_details">
 <ANCHOR id="u2fs-check-version" href="u2f-server/u2f-server-u2f-server-version.html#u2fs-check-version">

@@ -42,10 +42,14 @@ u2fs_EC_KEY_t
 debug
 U2F_VERSION
 U2FS_HASH_LEN
+u2fs_reg_res
+u2fs_auth_res
+u2fs_ctx
 </SECTION>
 
 <SECTION>
 <FILE>sha256</FILE>
+sha256_state
 sha256_init
 sha256_process
 sha256_done

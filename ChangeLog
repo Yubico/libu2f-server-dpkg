@@ -1,3 +1,111 @@
+2015-07-01  Alessio Di Mauro <alessio@yubico.com>
+
+	* NEWS, configure.ac: Version 1.0.0.
+
+2015-07-01  Alessio Di Mauro <alessio@yubico.com>
+
+	* u2f-server/cdecode.c: Improved support for other architectures.
+	Debian BUG #787133.
+
+2015-01-23  Alessio Di Mauro <alessio@yubico.com>
+
+	* tests/basic.c, tests/core.c, u2f-server/openssl.c: Updated basic
+	test to use check.
+
+2015-01-23  Alessio Di Mauro <alessio@yubico.com>
+
+	* README: Moved badges.
+
+2015-01-23  Alessio Di Mauro <alessio@yubico.com>
+
+	* tests/u2f-server-test.sh: Keep on testing.
+
+2015-01-23  Alessio Di Mauro <alessio@yubico.com>
+
+	* README: Added badges.
+
+2015-01-23  Alessio Di Mauro <alessio@yubico.com>
+
+	* u2f-server/openssl.c: Testing fixes for Travis.
+
+2015-01-23  Alessio Di Mauro <alessio@yubico.com>
+
+	* u2f-server/openssl.c: Minor fixes to tests.
+
+2015-01-23  Alessio Di Mauro <alessio@yubico.com>
+
+	* tests/u2f-server-test.sh: Yet more tests.
+
+2015-01-23  Alessio Di Mauro <alessio@yubico.com>
+
+	* .gitignore, tests/Makefile.am, tests/openssl.c,
+	u2f-server/crypto.h, u2f-server/openssl.c: Fixed test coverage,
+	added more tests.
+
+2015-01-22  Alessio Di Mauro <alessio@yubico.com>
+
+	* tests/basic.c: More tests.
+
+2015-01-22  Alessio Di Mauro <alessio@yubico.com>
+
+	* Makefile.am, build-aux/travis: Excluded cmdline.c from coverage.
+
+2015-01-22  Alessio Di Mauro <alessio@yubico.com>
+
+	* tests/u2f-server-test.sh: More tests.
+
+2015-01-22  Alessio Di Mauro <alessio@yubico.com>
+
+	* tests/basic.c: Added tests to strerror.
+
+2015-01-22  Alessio Di Mauro <alessio@yubico.com>
+
+	* tests/core.c: Added tests to init_global with debug.
+
+2015-01-21  Klas Lindfors <klas@yubico.com>
+
+	* .gitignore, .travis.yml, Makefile.am, build-aux/travis,
+	configure.ac, src/Makefile.am, u2f-server/Makefile.am: add coverage
+	report and let travis report it to coveralls
+
+2014-12-01  Henrik Stråth <minisu@users.noreply.github.com>
+
+	* NEWS: Update NEWS
+
+2014-11-26  Simon Josefsson <simon@josefsson.org>
+
+	* u2f-server/openssl.c: Simplify X.509 cert dumping.
+
+2014-11-25  Alessio Di Mauro <alessio@yubico.com>
+
+	* doc/Make_Release.adoc: Typo.
+
+2014-11-25  Alessio Di Mauro <alessio@yubico.com>
+
+	* doc/MakeRelease.adoc, doc/Make_Release.adoc: Renamed to improve
+	rendering on devyco.
+
+2014-11-25  Alessio Di Mauro <alessio@yubico.com>
+
+	* doc/MakeRelease.adoc: Added MakeRelease.
+
+2014-11-25  Alessio Di Mauro <alessio@yubico.com>
+
+	* NEWS: Added stub for 0.0.1.
+
+2014-11-25  Simon Josefsson <simon@josefsson.org>
+
+	* tests/Makefile.am, tests/u2f-server-test.sh: Simplify CLI test a
+	bit.
+
+2014-11-25  Alessio Di Mauro <alessio@yubico.com>
+
+	* configure.ac: Bump LT version.
+
+2014-11-25  Alessio Di Mauro <alessio@yubico.com>
+
+	* configure.ac: Bump AC version.
+
 2014-11-25  Alessio Di Mauro <alessio@yubico.com>
 
 	* NEWS: Release 0.0.0.
