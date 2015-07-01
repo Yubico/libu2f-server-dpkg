@@ -1,5 +1,7 @@
 libu2f-server NEWS -- History of user-visible changes.          -*- outline -*-
 
-* Version 0.0.0 (released 2014-11-25)
+* Version 1.0.0 (released 2015-07-01)
+ ** Improved compatibility for other architectures.
 
-** Initial release.
+* Version 0.0.0 (released 2014-11-25)
+ ** Initial release.

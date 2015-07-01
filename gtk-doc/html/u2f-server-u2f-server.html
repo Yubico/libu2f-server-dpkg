@@ -8,15 +8,14 @@
 <link rel="up" href="intro.html" title="Yubico Universal 2nd Factor C Library">
 <link rel="prev" href="intro.html" title="Yubico Universal 2nd Factor C Library">
 <link rel="next" href="u2f-server-u2f-server-version.html" title="u2f-server-version">
-<meta name="generator" content="GTK-Doc V1.20 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.21 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
-<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="10"><tr valign="middle">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="5"><tr valign="middle">
 <td width="100%" align="left" class="shortcuts">
-<a href="#" class="shortcut">Top</a><span id="nav_description"> <span class="dim">|</span> 
-                  <a href="#u2f-server-u2f-server.description" class="shortcut">Description</a></span><span id="nav_hierarchy"> <span class="dim">|</span> 
-                  <a href="#u2f-server-u2f-server.object-hierarchy" class="shortcut">Object Hierarchy</a></span>
+<a href="#" class="shortcut">Top</a><span id="nav_description">  <span class="dim">|</span> 
+                  <a href="#u2f-server-u2f-server.description" class="shortcut">Description</a></span>
 </td>
 <td><a accesskey="h" href="index.html"><img src="home.png" width="16" height="16" border="0" alt="Home"></a></td>
 <td><a accesskey="u" href="intro.html"><img src="up.png" width="16" height="16" border="0" alt="Up"></a></td>
@@ -247,11 +246,6 @@
 </table></div>
 </div>
 <div class="refsect1">
-<a name="u2f-server-u2f-server.object-hierarchy"></a><h2>Object Hierarchy</h2>
-<pre class="screen">
-</pre>
-</div>
-<div class="refsect1">
 <a name="u2f-server-u2f-server.description"></a><h2>Description</h2>
 <p>
 </p>
@@ -265,7 +259,7 @@ u2fs_global_init (<em class="parameter"><code><a class="link" href="u2f-server-u
 <p>Initialize the library.  This function is not guaranteed to be
 thread safe and must be invoked on application startup.</p>
 <div class="refsect3">
-<a name="id-1.2.3.7.2.5"></a><h4>Parameters</h4>
+<a name="id-1.2.3.6.2.5"></a><h4>Parameters</h4>
 <div class="informaltable"><table width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
@@ -280,7 +274,7 @@ thread safe and must be invoked on application startup.</p>
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.3.7.2.6"></a><h4>Returns</h4>
+<a name="id-1.2.3.6.2.6"></a><h4>Returns</h4>
 <p> On success <a class="link" href="u2f-server-u2f-server.html#U2FS-OK:CAPS"><code class="literal">U2FS_OK</code></a> (integer 0) is returned, and on errors
 an <a class="link" href="u2f-server-u2f-server.html#u2fs-rc" title="enum u2fs_rc"><span class="type">u2fs_rc</span></a> error code.</p>
 <p></p>
@@ -305,7 +299,7 @@ reason for the particular error code.</p>
 <p>This function is one of few in the library that can be used without
 a successful call to <a class="link" href="u2f-server-u2f-server.html#u2fs-global-init" title="u2fs_global_init ()"><code class="function">u2fs_global_init()</code></a>.</p>
 <div class="refsect3">
-<a name="id-1.2.3.7.4.7"></a><h4>Parameters</h4>
+<a name="id-1.2.3.6.4.7"></a><h4>Parameters</h4>
 <div class="informaltable"><table width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
@@ -320,7 +314,7 @@ a successful call to <a class="link" href="u2f-server-u2f-server.html#u2fs-globa
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.3.7.4.8"></a><h4>Returns</h4>
+<a name="id-1.2.3.6.4.8"></a><h4>Returns</h4>
 <p> Returns a pointer to a statically allocated string
 containing an explanation of the error code <em class="parameter"><code>err</code></em>
 .</p>
@@ -339,7 +333,7 @@ returns the string "U2FS_OK".</p>
 <p>This function is one of few in the library that can be used without
 a successful call to <a class="link" href="u2f-server-u2f-server.html#u2fs-global-init" title="u2fs_global_init ()"><code class="function">u2fs_global_init()</code></a>.</p>
 <div class="refsect3">
-<a name="id-1.2.3.7.5.7"></a><h4>Parameters</h4>
+<a name="id-1.2.3.6.5.7"></a><h4>Parameters</h4>
 <div class="informaltable"><table width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
@@ -354,7 +348,7 @@ a successful call to <a class="link" href="u2f-server-u2f-server.html#u2fs-globa
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.3.7.5.8"></a><h4>Returns</h4>
+<a name="id-1.2.3.6.5.8"></a><h4>Returns</h4>
 <p> Returns a pointer to a statically allocated string
 containing a string version of the error code <em class="parameter"><code>err</code></em>
 , or NULL if
@@ -369,7 +363,7 @@ the error code is not known.</p>
 u2fs_init (<em class="parameter"><code><a class="link" href="u2f-server-u2f-server.html#u2fs-ctx-t" title="u2fs_ctx_t"><span class="type">u2fs_ctx_t</span></a> **ctx</code></em>);</pre>
 <p>Initialize the U2F server context handle.</p>
 <div class="refsect3">
-<a name="id-1.2.3.7.6.5"></a><h4>Parameters</h4>
+<a name="id-1.2.3.6.6.5"></a><h4>Parameters</h4>
 <div class="informaltable"><table width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
@@ -384,7 +378,7 @@ u2fs_init (<em class="parameter"><code><a class="link" href="u2f-server-u2f-serv
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.3.7.6.6"></a><h4>Returns</h4>
+<a name="id-1.2.3.6.6.6"></a><h4>Returns</h4>
 <p> On success <a class="link" href="u2f-server-u2f-server.html#U2FS-OK:CAPS"><code class="literal">U2FS_OK</code></a> (integer 0) is returned, and on errors
 an <a class="link" href="u2f-server-u2f-server.html#u2fs-rc" title="enum u2fs_rc"><span class="type">u2fs_rc</span></a> error code.</p>
 <p></p>
@@ -398,7 +392,7 @@ u2fs_done (<em class="parameter"><code><a class="link" href="u2f-server-u2f-serv
 <p>Deallocate resources associated with context <em class="parameter"><code>ctx</code></em>
 .</p>
 <div class="refsect3">
-<a name="id-1.2.3.7.7.5"></a><h4>Parameters</h4>
+<a name="id-1.2.3.6.7.5"></a><h4>Parameters</h4>
 <div class="informaltable"><table width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
@@ -423,7 +417,7 @@ u2fs_set_origin (<em class="parameter"><code><a class="link" href="u2f-server-u2
  within <em class="parameter"><code>ctx</code></em>
 . If a value is already present, it is cleared and the memory is released.</p>
 <div class="refsect3">
-<a name="id-1.2.3.7.8.5"></a><h4>Parameters</h4>
+<a name="id-1.2.3.6.8.5"></a><h4>Parameters</h4>
 <div class="informaltable"><table width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
@@ -445,7 +439,7 @@ u2fs_set_origin (<em class="parameter"><code><a class="link" href="u2f-server-u2
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.3.7.8.6"></a><h4>Returns</h4>
+<a name="id-1.2.3.6.8.6"></a><h4>Returns</h4>
 <p> On success <a class="link" href="u2f-server-u2f-server.html#U2FS-OK:CAPS"><code class="literal">U2FS_OK</code></a> (integer 0) is returned, and on errors
 a <a class="link" href="u2f-server-u2f-server.html#u2fs-rc" title="enum u2fs_rc"><span class="type">u2fs_rc</span></a> error code.</p>
 <p></p>
@@ -461,7 +455,7 @@ u2fs_set_appid (<em class="parameter"><code><a class="link" href="u2f-server-u2f
  within <em class="parameter"><code>ctx</code></em>
 . If a value is already present, it is cleared and the memory is released.</p>
 <div class="refsect3">
-<a name="id-1.2.3.7.9.5"></a><h4>Parameters</h4>
+<a name="id-1.2.3.6.9.5"></a><h4>Parameters</h4>
 <div class="informaltable"><table width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
@@ -483,7 +477,7 @@ u2fs_set_appid (<em class="parameter"><code><a class="link" href="u2f-server-u2f
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.3.7.9.6"></a><h4>Returns</h4>
+<a name="id-1.2.3.6.9.6"></a><h4>Returns</h4>
 <p> On success <a class="link" href="u2f-server-u2f-server.html#U2FS-OK:CAPS"><code class="literal">U2FS_OK</code></a> (integer 0) is returned, and on errors
 a <a class="link" href="u2f-server-u2f-server.html#u2fs-rc" title="enum u2fs_rc"><span class="type">u2fs_rc</span></a> error code.</p>
 <p></p>
@@ -500,7 +494,7 @@ u2fs_set_challenge (<em class="parameter"><code><a class="link" href="u2f-server
 . If a value is already
 present, it is cleared and the memory is released.</p>
 <div class="refsect3">
-<a name="id-1.2.3.7.10.5"></a><h4>Parameters</h4>
+<a name="id-1.2.3.6.10.5"></a><h4>Parameters</h4>
 <div class="informaltable"><table width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
@@ -522,7 +516,7 @@ present, it is cleared and the memory is released.</p>
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.3.7.10.6"></a><h4>Returns</h4>
+<a name="id-1.2.3.6.10.6"></a><h4>Returns</h4>
 <p> On success <a class="link" href="u2f-server-u2f-server.html#U2FS-OK:CAPS"><code class="literal">U2FS_OK</code></a> (integer 0) is returned, and on errors
 an <a class="link" href="u2f-server-u2f-server.html#u2fs-rc" title="enum u2fs_rc"><span class="type">u2fs_rc</span></a> error code.</p>
 <p></p>
@@ -538,7 +532,7 @@ u2fs_set_keyHandle (<em class="parameter"><code><a class="link" href="u2f-server
  within <em class="parameter"><code>ctx</code></em>
 . If a value is already present, it is cleared and the memory is released.</p>
 <div class="refsect3">
-<a name="id-1.2.3.7.11.5"></a><h4>Parameters</h4>
+<a name="id-1.2.3.6.11.5"></a><h4>Parameters</h4>
 <div class="informaltable"><table width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
@@ -560,7 +554,7 @@ u2fs_set_keyHandle (<em class="parameter"><code><a class="link" href="u2f-server
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.3.7.11.6"></a><h4>Returns</h4>
+<a name="id-1.2.3.6.11.6"></a><h4>Returns</h4>
 <p> On success <a class="link" href="u2f-server-u2f-server.html#U2FS-OK:CAPS"><code class="literal">U2FS_OK</code></a> (integer 0) is returned, and on errors
 an <a class="link" href="u2f-server-u2f-server.html#u2fs-rc" title="enum u2fs_rc"><span class="type">u2fs_rc</span></a> error code.</p>
 <p></p>
@@ -577,7 +571,7 @@ u2fs_set_publicKey (<em class="parameter"><code><a class="link" href="u2f-server
 . If a value is already
 present, it is cleared and the memory is released.</p>
 <div class="refsect3">
-<a name="id-1.2.3.7.12.5"></a><h4>Parameters</h4>
+<a name="id-1.2.3.6.12.5"></a><h4>Parameters</h4>
 <div class="informaltable"><table width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
@@ -599,7 +593,7 @@ present, it is cleared and the memory is released.</p>
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.3.7.12.6"></a><h4>Returns</h4>
+<a name="id-1.2.3.6.12.6"></a><h4>Returns</h4>
 <p> On success <a class="link" href="u2f-server-u2f-server.html#U2FS-OK:CAPS"><code class="literal">U2FS_OK</code></a> (integer 0) is returned, and on errors
 a <a class="link" href="u2f-server-u2f-server.html#u2fs-rc" title="enum u2fs_rc"><span class="type">u2fs_rc</span></a> error code.</p>
 <p></p>
@@ -614,7 +608,7 @@ u2fs_registration_challenge (<em class="parameter"><code><a class="link" href="u
 <p>Get a U2F RegistrationData JSON structure, used as the challenge in
 a U2F device registration.</p>
 <div class="refsect3">
-<a name="id-1.2.3.7.13.5"></a><h4>Parameters</h4>
+<a name="id-1.2.3.6.13.5"></a><h4>Parameters</h4>
 <div class="informaltable"><table width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
@@ -636,7 +630,7 @@ a U2F device registration.</p>
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.3.7.13.6"></a><h4>Returns</h4>
+<a name="id-1.2.3.6.13.6"></a><h4>Returns</h4>
 <p> On success <a class="link" href="u2f-server-u2f-server.html#U2FS-OK:CAPS"><code class="literal">U2FS_OK</code></a> (integer 0) is returned, and on errors
 an <a class="link" href="u2f-server-u2f-server.html#u2fs-rc" title="enum u2fs_rc"><span class="type">u2fs_rc</span></a> error code.</p>
 <p></p>
@@ -651,7 +645,7 @@ u2fs_registration_verify (<em class="parameter"><code><a class="link" href="u2f-
                           <em class="parameter"><code><a class="link" href="u2f-server-u2f-server.html#u2fs-reg-res-t" title="u2fs_reg_res_t"><span class="type">u2fs_reg_res_t</span></a> **output</code></em>);</pre>
 <p>Get a U2F registration response and check its validity.</p>
 <div class="refsect3">
-<a name="id-1.2.3.7.14.5"></a><h4>Parameters</h4>
+<a name="id-1.2.3.6.14.5"></a><h4>Parameters</h4>
 <div class="informaltable"><table width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
@@ -678,7 +672,7 @@ u2fs_registration_verify (<em class="parameter"><code><a class="link" href="u2f-
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.3.7.14.6"></a><h4>Returns</h4>
+<a name="id-1.2.3.6.14.6"></a><h4>Returns</h4>
 <p> On success <a class="link" href="u2f-server-u2f-server.html#U2FS-OK:CAPS"><code class="literal">U2FS_OK</code></a> (integer 0) is returned and <em class="parameter"><code>output</code></em>
 is filled up with the user public key, the key handle and the attestation certificate. On errors
 a <a class="link" href="u2f-server-u2f-server.html#u2fs-rc" title="enum u2fs_rc"><span class="type">u2fs_rc</span></a> error code.</p>
@@ -694,7 +688,7 @@ u2fs_get_registration_keyHandle (<em class="parameter"><code><a class="link" hre
 operation.  The memory is allocate by the library, and must not be
 deallocated by the caller.</p>
 <div class="refsect3">
-<a name="id-1.2.3.7.15.5"></a><h4>Parameters</h4>
+<a name="id-1.2.3.6.15.5"></a><h4>Parameters</h4>
 <div class="informaltable"><table width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
@@ -709,7 +703,7 @@ deallocated by the caller.</p>
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.3.7.15.6"></a><h4>Returns</h4>
+<a name="id-1.2.3.6.15.6"></a><h4>Returns</h4>
 <p> On success the pointer to the buffer containing the keyHandle
 is returned, and on errors NULL.</p>
 <p></p>
@@ -725,7 +719,7 @@ registration operation.  The memory is allocated by the library,
 and must not be deallocated by the caller.  The returned buffer
 pointer holds <a class="link" href="u2f-server-u2f-server.html#U2FS-PUBLIC-KEY-LEN:CAPS" title="U2FS_PUBLIC_KEY_LEN"><code class="literal">U2FS_PUBLIC_KEY_LEN</code></a> bytes.</p>
 <div class="refsect3">
-<a name="id-1.2.3.7.16.5"></a><h4>Parameters</h4>
+<a name="id-1.2.3.6.16.5"></a><h4>Parameters</h4>
 <div class="informaltable"><table width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
@@ -740,7 +734,7 @@ pointer holds <a class="link" href="u2f-server-u2f-server.html#U2FS-PUBLIC-KEY-L
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.3.7.16.6"></a><h4>Returns</h4>
+<a name="id-1.2.3.6.16.6"></a><h4>Returns</h4>
 <p> On success the pointer to the buffer containing the user public key
 is returned, and on errors NULL.</p>
 <p></p>
@@ -754,7 +748,7 @@ u2fs_free_reg_res (<em class="parameter"><code><a class="link" href="u2f-server-
 <p>Deallocate resources associated with <em class="parameter"><code>result</code></em>
 .</p>
 <div class="refsect3">
-<a name="id-1.2.3.7.17.5"></a><h4>Parameters</h4>
+<a name="id-1.2.3.6.17.5"></a><h4>Parameters</h4>
 <div class="informaltable"><table width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
@@ -778,7 +772,7 @@ u2fs_authentication_challenge (<em class="parameter"><code><a class="link" href=
 <p>Get a U2F AuthenticationData JSON structure, used as the challenge in
 a U2F authentication procedure.</p>
 <div class="refsect3">
-<a name="id-1.2.3.7.18.5"></a><h4>Parameters</h4>
+<a name="id-1.2.3.6.18.5"></a><h4>Parameters</h4>
 <div class="informaltable"><table width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
@@ -800,7 +794,7 @@ a U2F authentication procedure.</p>
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.3.7.18.6"></a><h4>Returns</h4>
+<a name="id-1.2.3.6.18.6"></a><h4>Returns</h4>
 <p> On success <a class="link" href="u2f-server-u2f-server.html#U2FS-OK:CAPS"><code class="literal">U2FS_OK</code></a> (integer 0) is returned, and on errors
 a <a class="link" href="u2f-server-u2f-server.html#u2fs-rc" title="enum u2fs_rc"><span class="type">u2fs_rc</span></a> error code.</p>
 <p></p>
@@ -815,7 +809,7 @@ u2fs_authentication_verify (<em class="parameter"><code><a class="link" href="u2
                             <em class="parameter"><code><a class="link" href="u2f-server-u2f-server.html#u2fs-auth-res-t" title="u2fs_auth_res_t"><span class="type">u2fs_auth_res_t</span></a> **output</code></em>);</pre>
 <p>Get a U2F authentication response and check its validity.</p>
 <div class="refsect3">
-<a name="id-1.2.3.7.19.5"></a><h4>Parameters</h4>
+<a name="id-1.2.3.6.19.5"></a><h4>Parameters</h4>
 <div class="informaltable"><table width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
@@ -842,7 +836,7 @@ u2fs_authentication_verify (<em class="parameter"><code><a class="link" href="u2
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.3.7.19.6"></a><h4>Returns</h4>
+<a name="id-1.2.3.6.19.6"></a><h4>Returns</h4>
 <p> On a successful verification <a class="link" href="u2f-server-u2f-server.html#U2FS-OK:CAPS"><code class="literal">U2FS_OK</code></a> (integer 0) is returned and <em class="parameter"><code>output</code></em>
 is filled with the authentication result (same as the returned value), the counter received from the token and the user presence information. On errors
 a <a class="link" href="u2f-server-u2f-server.html#u2fs-rc" title="enum u2fs_rc"><span class="type">u2fs_rc</span></a> error code is returned.</p>
@@ -861,7 +855,7 @@ u2fs_get_authentication_result (<em class="parameter"><code><a class="link" href
 into its components. If any of the output parameters is set to NULL, that parameter
 will be ignored.</p>
 <div class="refsect3">
-<a name="id-1.2.3.7.20.5"></a><h4>Parameters</h4>
+<a name="id-1.2.3.6.20.5"></a><h4>Parameters</h4>
 <div class="informaltable"><table width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
@@ -893,7 +887,7 @@ will be ignored.</p>
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.3.7.20.6"></a><h4>Returns</h4>
+<a name="id-1.2.3.6.20.6"></a><h4>Returns</h4>
 <p> On success <a class="link" href="u2f-server-u2f-server.html#U2FS-OK:CAPS"><span class="type">U2FS_OK</span></a> is returned, and on errors a <a class="link" href="u2f-server-u2f-server.html#u2fs-rc" title="enum u2fs_rc"><span class="type">u2fs_rc</span></a> error code.
 The value <em class="parameter"><code>verified</code></em>
 is set to <a class="link" href="u2f-server-u2f-server.html#U2FS-OK:CAPS"><span class="type">U2FS_OK</span></a> on a successful authenticaiton, and to 0 otherwise
@@ -913,7 +907,7 @@ u2fs_free_auth_res (<em class="parameter"><code><a class="link" href="u2f-server
 <p>Deallocate resources associated with <em class="parameter"><code>result</code></em>
 .</p>
 <div class="refsect3">
-<a name="id-1.2.3.7.21.5"></a><h4>Parameters</h4>
+<a name="id-1.2.3.6.21.5"></a><h4>Parameters</h4>
 <div class="informaltable"><table width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
@@ -967,7 +961,7 @@ u2fs_free_auth_res (<em class="parameter"><code><a class="link" href="u2f-server
 <a name="u2fs-rc"></a><h3>enum u2fs_rc</h3>
 <p>Error codes.</p>
 <div class="refsect3">
-<a name="id-1.2.3.8.6.4"></a><h4>Members</h4>
+<a name="id-1.2.3.7.6.4"></a><h4>Members</h4>
 <div class="informaltable"><table width="100%" border="0">
 <colgroup>
 <col width="300px" class="enum_members_name">
@@ -1047,7 +1041,7 @@ u2fs_free_auth_res (<em class="parameter"><code><a class="link" href="u2f-server
 <a name="u2fs-initflags"></a><h3>enum u2fs_initflags</h3>
 <p>Flags passed to <a class="link" href="u2f-server-u2f-server.html#u2fs-global-init" title="u2fs_global_init ()"><code class="function">u2fs_global_init()</code></a>.</p>
 <div class="refsect3">
-<a name="id-1.2.3.8.7.4"></a><h4>Members</h4>
+<a name="id-1.2.3.7.7.4"></a><h4>Members</h4>
 <div class="informaltable"><table width="100%" border="0">
 <colgroup>
 <col width="300px" class="enum_members_name">
@@ -1092,6 +1086,6 @@ u2fs_free_auth_res (<em class="parameter"><code><a class="link" href="u2f-server
 </div>
 <div class="footer">
 <hr>
-          Generated by GTK-Doc V1.20</div>
+          Generated by GTK-Doc V1.21</div>
 </body>
 </html>

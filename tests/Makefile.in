@@ -104,7 +104,9 @@ PRE_UNINSTALL = :
 POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
-check_PROGRAMS = basic$(EXEEXT) core$(EXEEXT)
+@ENABLE_COV_TRUE@am__append_1 = --coverage
+@ENABLE_COV_TRUE@am__append_2 = --coverage
+check_PROGRAMS = basic$(EXEEXT) core$(EXEEXT) openssl$(EXEEXT)
 subdir = tests
 DIST_COMMON = $(srcdir)/Makefile.in $(srcdir)/Makefile.am \
 	$(dist_check_SCRIPTS) $(top_srcdir)/build-aux/depcomp \
@@ -127,7 +129,7 @@ basic_OBJECTS = basic.$(OBJEXT)
 basic_LDADD = $(LDADD)
 am__DEPENDENCIES_1 =
 basic_DEPENDENCIES = $(top_builddir)/u2f-server/libu2f-server.la \
-	$(am__DEPENDENCIES_1)
+	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1)
 AM_V_lt = $(am__v_lt_@AM_V@)
 am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
 am__v_lt_0 = --silent
@@ -136,7 +138,12 @@ core_SOURCES = core.c
 core_OBJECTS = core.$(OBJEXT)
 core_LDADD = $(LDADD)
 core_DEPENDENCIES = $(top_builddir)/u2f-server/libu2f-server.la \
-	$(am__DEPENDENCIES_1)
+	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1)
+openssl_SOURCES = openssl.c
+openssl_OBJECTS = openssl.$(OBJEXT)
+openssl_LDADD = $(LDADD)
+openssl_DEPENDENCIES = $(top_builddir)/u2f-server/libu2f-server.la \
+	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1)
 AM_V_P = $(am__v_P_@AM_V@)
 am__v_P_ = $(am__v_P_@AM_DEFAULT_V@)
 am__v_P_0 = false
@@ -171,8 +178,8 @@ AM_V_CCLD = $(am__v_CCLD_@AM_V@)
 am__v_CCLD_ = $(am__v_CCLD_@AM_DEFAULT_V@)
 am__v_CCLD_0 = @echo "  CCLD    " $@;
 am__v_CCLD_1 = 
-SOURCES = basic.c core.c
-DIST_SOURCES = basic.c core.c
+SOURCES = basic.c core.c openssl.c
+DIST_SOURCES = basic.c core.c openssl.c
 am__can_run_installinfo = \
   case $$AM_UPDATE_INFO_DIR in \
     n|no|NO) false;; \
@@ -537,13 +544,11 @@ target_alias = @target_alias@
 top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
-AM_CFLAGS = $(WARN_CFLAGS)
-AM_CPPFLAGS = -I$(srcdir)/.. -I$(builddir)/..
-U2FSERVER = $(top_builddir)/src/u2f-server
-AM_TESTS_ENVIRONMENT = U2FSBIN=$(U2FSERVER); export U2FSBIN;
-TESTS_ENVIRONMENT = U2FSBIN=$(U2FSERVER); export U2FSBIN;
-AM_LDFLAGS = -no-install
-LDADD = $(top_builddir)/u2f-server/libu2f-server.la $(CHECK_LIBS)
+AM_CFLAGS = $(WARN_CFLAGS) -DMAKE_CHECK $(am__append_1)
+AM_CPPFLAGS = -I$(srcdir)/.. -I$(builddir)/..  $(LIBSSL_CFLAGS)
+AM_LDFLAGS = -no-install $(am__append_2)
+LDADD = $(top_builddir)/u2f-server/libu2f-server.la $(CHECK_LIBS) \
+	$(LIBSSL_LIBS)
 dist_check_SCRIPTS = u2f-server-test.sh
 TESTS = $(check_PROGRAMS) u2f-server-test.sh
 TEST_EXTENSIONS = .sh
@@ -601,6 +606,10 @@ core$(EXEEXT): $(core_OBJECTS) $(core_DEPENDENCIES) $(EXTRA_core_DEPENDENCIES)
 	@rm -f core$(EXEEXT)
 	$(AM_V_CCLD)$(LINK) $(core_OBJECTS) $(core_LDADD) $(LIBS)
 
+openssl$(EXEEXT): $(openssl_OBJECTS) $(openssl_DEPENDENCIES) $(EXTRA_openssl_DEPENDENCIES) 
+	@rm -f openssl$(EXEEXT)
+	$(AM_V_CCLD)$(LINK) $(openssl_OBJECTS) $(openssl_LDADD) $(LIBS)
+
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)
 
@@ -609,6 +618,7 @@ distclean-compile:
 
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/basic.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/core.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/openssl.Po@am__quote@
 
 .c.o:
 @am__fastdepCC_TRUE@	$(AM_V_CC)$(COMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
@@ -840,6 +850,13 @@ basic.log: basic$(EXEEXT)
 core.log: core$(EXEEXT)
 	@p='core$(EXEEXT)'; \
 	b='core'; \
+	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
+	--log-file $$b.log --trs-file $$b.trs \
+	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
+	"$$tst" $(AM_TESTS_FD_REDIRECT)
+openssl.log: openssl$(EXEEXT)
+	@p='openssl$(EXEEXT)'; \
+	b='openssl'; \
 	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
 	--log-file $$b.log --trs-file $$b.trs \
 	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \

@@ -20,6 +20,16 @@ sha256
 <!-- ##### SECTION Image ##### -->
 
 
+<!-- ##### STRUCT sha256_state ##### -->
+<para>
+
+</para>
+
+@length: 
+@state: 
+@curlen: 
+@buf: 
+
 <!-- ##### FUNCTION sha256_init ##### -->
 <para>
 

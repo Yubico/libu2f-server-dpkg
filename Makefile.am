@@ -31,6 +31,29 @@ ACLOCAL_AMFLAGS = -I m4
 
 DISTCHECK_CONFIGURE_FLAGS = --enable-gtk-doc
 
+if ENABLE_COV
+cov-reset:
+	rm -fr coverage
+	find . -name "*.gcda" -exec rm {} \;
+	lcov --directory . --zerocounters
+
+cov-report:
+	mkdir -p coverage
+	lcov --compat-libtool --directory . --capture --output-file coverage/app.info
+	lcov --extract coverage/app.info '*.c' --output-file coverage/app2.info
+	lcov --remove coverage/app2.info cmdline.c --output-file coverage/app3.info
+	genhtml -o coverage/ coverage/app3.info
+
+cov:
+	make cov-report
+
+clean-local:
+	make cov-reset
+
+check:
+	make cov
+endif
+
 # Release
 
 indent:

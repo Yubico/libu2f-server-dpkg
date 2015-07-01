@@ -106,6 +106,7 @@ POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
 bin_PROGRAMS = u2f-server$(EXEEXT)
+@ENABLE_COV_TRUE@am__append_1 = --coverage
 subdir = src
 DIST_COMMON = $(srcdir)/Makefile.in $(srcdir)/Makefile.am \
 	$(top_srcdir)/build-aux/depcomp $(dist_man_MANS)
@@ -361,7 +362,7 @@ target_alias = @target_alias@
 top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
-AM_CFLAGS = $(WARN_CFLAGS)
+AM_CFLAGS = $(WARN_CFLAGS) $(am__append_1)
 AM_CPPFLAGS = -I$(srcdir)/.. -I$(builddir)/.. -I$(builddir)/../u2f-server $(LIBSSL_CFLAGS)
 u2f_server_SOURCES = u2f-server.c cmdline.ggo cmdline.c cmdline.h
 u2f_server_LDADD = ../u2f-server/libu2f-server.la $(LIBSSL_LIBS)
@@ -369,6 +370,7 @@ BUILT_SOURCES = cmdline.c cmdline.h
 MAINTAINERCLEANFILES = $(BUILT_SOURCES)
 dist_man_MANS = u2f-server.1
 DISTCLEANFILES = $(dist_man_MANS)
+@ENABLE_COV_TRUE@AM_LDFLAGS = --coverage
 all: $(BUILT_SOURCES)
 	$(MAKE) $(AM_MAKEFLAGS) all-am
 
