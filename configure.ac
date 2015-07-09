@@ -25,13 +25,13 @@
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-AC_INIT([libu2f-server], [1.0.0], [yubico-devel@googlegroups.com])
+AC_INIT([libu2f-server], [1.0.1], [yubico-devel@googlegroups.com])
 AC_CONFIG_MACRO_DIR([m4])
 AC_CONFIG_AUX_DIR([build-aux])
 
 # http://www.gnu.org/s/libtool/manual/html_node/Updating-version-info.html
 AC_SUBST(LT_CURRENT, 0)
-AC_SUBST(LT_REVISION, 2)
+AC_SUBST(LT_REVISION, 3)
 AC_SUBST(LT_AGE, 0)
 
 AM_INIT_AUTOMAKE([gnits dist-xz no-dist-gzip std-options -Wall])
@@ -44,6 +44,7 @@ LT_INIT([win32-dll])
 
 GTK_DOC_CHECK(1.1)
 AM_MISSING_PROG(HELP2MAN, help2man, $missing_dir)
+AM_MISSING_PROG(HELP2ADOC, help2adoc, $missing_dir)
 gl_LD_VERSION_SCRIPT
 
 PKG_CHECK_MODULES([LIBJSON], [json-c], [], [
@@ -60,6 +61,8 @@ LIBS=$am_save_LIBS
 
 PKG_CHECK_MODULES([LIBSSL], [libssl], [], [])
 
+PKG_CHECK_MODULES([LIBCRYPTO], [libcrypto], [], [])
+
 PKG_CHECK_MODULES([CHECK], [check], [], [])
 
 AC_ARG_ENABLE([coverage],
@@ -68,6 +71,13 @@ AC_ARG_ENABLE([coverage],
                               [],
                               [enable_cov=no])
 AM_CONDITIONAL([ENABLE_COV],[test '!' "$enable_cov" = no])
+
+AC_ARG_ENABLE([h2a],
+              [AS_HELP_STRING([--enable-h2a],
+                              [generate asciidoc manpages])],
+                              [enable_h2a=$enableval],
+                              [enable_h2a=yes])
+AM_CONDITIONAL([ENABLE_H2A],[test '!' "$enable_h2a" = no])
 
 AC_ARG_ENABLE([gcc-warnings],
   [AS_HELP_STRING([--enable-gcc-warnings],
@@ -132,6 +142,8 @@ AC_MSG_NOTICE([summary of build options:
   JSON LIBS:        $LIBJSON_LIBS
   OPENSSL CFLAGS:   $LIBSSL_CFLAGS
   OPENSSL LIBS:     $LIBSSL_LIBS
+  LIBCRYPTO CFLAGS: $LIBCRYPTO_CFLAGS
+  LIBCRYPTO LIBS:   $LIBCRYPTO_LIBS
   CHECK CFLAGS:     $CHECK_CFLAGS
   CHECK LIBS:       $CHECK_LIBS
 ])

@@ -56,6 +56,7 @@ void crypto_init(void)
 void crypto_release(void)
 {
   RAND_cleanup();
+  ERR_free_strings();
 }
 
 u2fs_rc set_random_bytes(char *data, size_t len)
@@ -77,14 +78,14 @@ u2fs_rc decode_X509(const unsigned char *data, size_t len,
 
   const unsigned char *p;
 
-  if (data == NULL || len == 0)
+  if (data == NULL || len == 0 || cert == NULL)
     return U2FS_MEMORY_ERROR;
 
   p = data;
 
   //Always set 1st param to NULL as per http://www.tedunangst.com/flak/post/analysis-of-d2i-X509-reuse
   *cert = (u2fs_X509_t *) d2i_X509(NULL, &p, len);
-  if (cert == NULL || *cert == NULL) {
+  if (*cert == NULL) {
     if (debug) {
       unsigned long err = 0;
       err = ERR_get_error();
@@ -104,14 +105,14 @@ u2fs_rc decode_ECDSA(const unsigned char *data, size_t len,
 
   const unsigned char *p;
 
-  if (data == NULL || len == 0)
+  if (data == NULL || len == 0 || sig == NULL)
     return U2FS_MEMORY_ERROR;
 
   p = data;
 
   *sig = (u2fs_ECDSA_t *) d2i_ECDSA_SIG(NULL, &p, len);
 
-  if (sig == NULL || *sig == NULL) {
+  if (*sig == NULL) {
     if (debug) {
       unsigned long err = 0;
       err = ERR_get_error();
@@ -208,7 +209,7 @@ u2fs_rc verify_ECDSA(const unsigned char *dgst, int dgst_len,
 u2fs_rc extract_EC_KEY_from_X509(const u2fs_X509_t * cert,
                                  u2fs_EC_KEY_t ** key)
 {
-  if (cert == NULL)
+  if (cert == NULL || key == NULL)
     return U2FS_MEMORY_ERROR;
 
   EVP_PKEY *pkey = X509_get_pubkey((X509 *) cert);
@@ -227,8 +228,9 @@ u2fs_rc extract_EC_KEY_from_X509(const u2fs_X509_t * cert,
   *key = (u2fs_EC_KEY_t *) EVP_PKEY_get1_EC_KEY(pkey);
 
   EVP_PKEY_free(pkey);
+  pkey = NULL;
 
-  if (key == NULL || *key == NULL) {
+  if (*key == NULL) {
     if (debug) {
       unsigned long err = 0;
       err = ERR_get_error();
@@ -294,6 +296,7 @@ u2fs_rc dump_user_key(const u2fs_EC_KEY_t * key, char **output)
 
   if (*output == NULL) {
     EC_GROUP_free(ecg);
+    ecg = NULL;
     return U2FS_MEMORY_ERROR;
   }
 
@@ -301,12 +304,14 @@ u2fs_rc dump_user_key(const u2fs_EC_KEY_t * key, char **output)
       (ecg, point, pcf, (unsigned char *) *output, U2FS_PUBLIC_KEY_LEN,
        NULL) != U2FS_PUBLIC_KEY_LEN) {
     free(ecg);
+    ecg = NULL;
     free(*output);
     *output = NULL;
     return U2FS_CRYPTO_ERROR;
   }
 
   EC_GROUP_free(ecg);
+  ecg = NULL;
 
   return U2FS_OK;
 

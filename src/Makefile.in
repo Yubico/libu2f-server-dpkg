@@ -127,9 +127,7 @@ am__installdirs = "$(DESTDIR)$(bindir)" "$(DESTDIR)$(man1dir)"
 PROGRAMS = $(bin_PROGRAMS)
 am_u2f_server_OBJECTS = u2f-server.$(OBJEXT) cmdline.$(OBJEXT)
 u2f_server_OBJECTS = $(am_u2f_server_OBJECTS)
-am__DEPENDENCIES_1 =
-u2f_server_DEPENDENCIES = ../u2f-server/libu2f-server.la \
-	$(am__DEPENDENCIES_1)
+u2f_server_DEPENDENCIES = ../u2f-server/libu2f-server.la
 AM_V_lt = $(am__v_lt_@AM_V@)
 am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
 am__v_lt_0 = --silent
@@ -257,6 +255,7 @@ GREP = @GREP@
 GTKDOC_CHECK = @GTKDOC_CHECK@
 GTKDOC_MKPDF = @GTKDOC_MKPDF@
 GTKDOC_REBASE = @GTKDOC_REBASE@
+HELP2ADOC = @HELP2ADOC@
 HELP2MAN = @HELP2MAN@
 HTML_DIR = @HTML_DIR@
 INSTALL = @INSTALL@
@@ -266,6 +265,8 @@ INSTALL_SCRIPT = @INSTALL_SCRIPT@
 INSTALL_STRIP_PROGRAM = @INSTALL_STRIP_PROGRAM@
 LD = @LD@
 LDFLAGS = @LDFLAGS@
+LIBCRYPTO_CFLAGS = @LIBCRYPTO_CFLAGS@
+LIBCRYPTO_LIBS = @LIBCRYPTO_LIBS@
 LIBJSON_CFLAGS = @LIBJSON_CFLAGS@
 LIBJSON_LIBS = @LIBJSON_LIBS@
 LIBOBJS = @LIBOBJS@
@@ -363,12 +364,12 @@ top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 AM_CFLAGS = $(WARN_CFLAGS) $(am__append_1)
-AM_CPPFLAGS = -I$(srcdir)/.. -I$(builddir)/.. -I$(builddir)/../u2f-server $(LIBSSL_CFLAGS)
+AM_CPPFLAGS = -I$(srcdir)/.. -I$(builddir)/.. -I$(builddir)/../u2f-server
 u2f_server_SOURCES = u2f-server.c cmdline.ggo cmdline.c cmdline.h
-u2f_server_LDADD = ../u2f-server/libu2f-server.la $(LIBSSL_LIBS)
+u2f_server_LDADD = ../u2f-server/libu2f-server.la
 BUILT_SOURCES = cmdline.c cmdline.h
 MAINTAINERCLEANFILES = $(BUILT_SOURCES)
-dist_man_MANS = u2f-server.1
+dist_man_MANS = $(top_srcdir)/man/u2f-server.1
 DISTCLEANFILES = $(dist_man_MANS)
 @ENABLE_COV_TRUE@AM_LDFLAGS = --coverage
 all: $(BUILT_SOURCES)
@@ -681,7 +682,8 @@ maintainer-clean-generic:
 	-test -z "$(MAINTAINERCLEANFILES)" || rm -f $(MAINTAINERCLEANFILES)
 clean: clean-am
 
-clean-am: clean-binPROGRAMS clean-generic clean-libtool mostlyclean-am
+clean-am: clean-binPROGRAMS clean-generic clean-libtool clean-local \
+	mostlyclean-am
 
 distclean: distclean-am
 	-rm -rf ./$(DEPDIR)
@@ -754,15 +756,15 @@ uninstall-man: uninstall-man1
 .MAKE: all check install install-am install-strip
 
 .PHONY: CTAGS GTAGS TAGS all all-am check check-am clean \
-	clean-binPROGRAMS clean-generic clean-libtool cscopelist-am \
-	ctags ctags-am distclean distclean-compile distclean-generic \
-	distclean-libtool distclean-tags distdir dvi dvi-am html \
-	html-am info info-am install install-am install-binPROGRAMS \
-	install-data install-data-am install-dvi install-dvi-am \
-	install-exec install-exec-am install-html install-html-am \
-	install-info install-info-am install-man install-man1 \
-	install-pdf install-pdf-am install-ps install-ps-am \
-	install-strip installcheck installcheck-am \
+	clean-binPROGRAMS clean-generic clean-libtool clean-local \
+	cscopelist-am ctags ctags-am distclean distclean-compile \
+	distclean-generic distclean-libtool distclean-tags distdir dvi \
+	dvi-am html html-am info info-am install install-am \
+	install-binPROGRAMS install-data install-data-am install-dvi \
+	install-dvi-am install-exec install-exec-am install-html \
+	install-html-am install-info install-info-am install-man \
+	install-man1 install-pdf install-pdf-am install-ps \
+	install-ps-am install-strip installcheck installcheck-am \
 	installcheck-binPROGRAMS installdirs maintainer-clean \
 	maintainer-clean-generic mostlyclean mostlyclean-compile \
 	mostlyclean-generic mostlyclean-libtool pdf pdf-am ps ps-am \
@@ -773,11 +775,19 @@ uninstall-man: uninstall-man1
 cmdline.c cmdline.h: cmdline.ggo Makefile.am
 	gengetopt --no-handle-help --input $^
 
-u2f-server.1: $(srcdir)/u2f-server.c $(srcdir)/cmdline.ggo $(top_srcdir)/configure.ac
+$(top_srcdir)/man/u2f-server.1: $(srcdir)/u2f-server.c $(srcdir)/cmdline.ggo $(top_srcdir)/configure.ac
 	$(HELP2MAN) \
-		--output=$@ $(builddir)/u2f-server$(EXEEXT) \
+		--output=$(top_builddir)/man/$@ $(builddir)/u2f-server$(EXEEXT) \
 		--name="Yubico Universal 2nd Factor (U2F) Server Tool" \
 		--no-info
+@ENABLE_H2A_TRUE@	$(HELP2ADOC) \
+@ENABLE_H2A_TRUE@		-e $(builddir)/u2f-server$(EXEEXT) \
+@ENABLE_H2A_TRUE@		--name="Yubico Universal 2nd Factor (U2F) Server Tool" \
+@ENABLE_H2A_TRUE@		> $(top_builddir)/man/$@.txt
+
+clean-local:
+	rm -f $(top_builddir)/man/*.[1-9]
+	rm -f $(top_builddir)/man/*.[1-9].txt
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.

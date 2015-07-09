@@ -1,3 +1,83 @@
+2015-07-08  Alessio Di Mauro <alessio@yubico.com>
+
+	* NEWS: Version 1.0.1.
+
+2015-07-09  Alessio Di Mauro <alessio@yubico.com>
+
+	* u2f-server/openssl.c: Free OpenSSL error strings on exit.
+
+2015-07-09  Alessio Di Mauro <alessio@yubico.com>
+
+	* src/u2f-server.c: Allow pam:// origins.
+
+2015-07-09  Alessio Di Mauro <alessio@yubico.com>
+
+	* tests/basic.c, u2f-server/core.c: Remove unused variables.
+
+2015-07-08  Alessio Di Mauro <alessio@yubico.com>
+
+	* src/Makefile.am: Change path for distribution man pages.
+
+2015-07-08  Alessio Di Mauro <alessio@yubico.com>
+
+	* u2f-server/core.c: Indent.
+
+2015-07-08  Alessio Di Mauro <alessio@yubico.com>
+
+	* src/u2f-server.c: Terminate string from fread.
+
+2015-07-08  Alessio Di Mauro <alessio@yubico.com>
+
+	* u2f-server/core.c: More minor leaks check.
+
+2015-07-08  Alessio Di Mauro <alessio@yubico.com>
+
+	* README: Added coverity badge to README.
+
+2015-07-08  Alessio Di Mauro <alessio@yubico.com>
+
+	* u2f-server/core.c, u2f-server/openssl.c: More NULL after free;
+
+2015-07-08  Alessio Di Mauro <alessio@yubico.com>
+
+	* u2f-server/core.c, u2f-server/openssl.c: Check for nullity
+	earlier.
+
+2015-07-08  Alessio Di Mauro <alessio@yubico.com>
+
+	* u2f-server/core.c, u2f-server/openssl.c: Fix minor leaks.
+
+2015-07-08  Alessio Di Mauro <alessio@yubico.com>
+
+	* u2f-server/core.c: Fix minor leaks.
+
+2015-07-08  Alessio Di Mauro <alessio@yubico.com>
+
+	* u2f-server/openssl.c: Check for nullity earlier.
+
+2015-07-08  Alessio Di Mauro <alessio@yubico.com>
+
+	* configure.ac, src/Makefile.am, tests/Makefile.am,
+	u2f-server/Makefile.am: Improve dependencies (helps building on
+	Debian).
+
+2015-07-03  Alessio Di Mauro <alessio@yubico.com>
+
+	* build-aux/travis: Disable h2a in travis.
+
+2015-07-03  Alessio Di Mauro <alessio@yubico.com>
+
+	* man/u2f-server.1.txt: Man fix.
+
+2015-07-03  Alessio Di Mauro <alessio@yubico.com>
+
+	* .gitignore, configure.ac, man/u2f-server.1.txt, src/Makefile.am: 
+	Moved man pages and added support for h2a.
+
+2015-07-01  Alessio Di Mauro <alessio@yubico.com>
+
+	* NEWS, configure.ac: Bump versions.
+
 2015-07-01  Alessio Di Mauro <alessio@yubico.com>
 
 	* configure.ac: Fixed LT version.

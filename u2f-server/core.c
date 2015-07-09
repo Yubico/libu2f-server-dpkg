@@ -82,12 +82,14 @@ u2fs_rc u2fs_init(u2fs_ctx_t ** ctx)
   rc = set_random_bytes(buf, U2FS_CHALLENGE_RAW_LEN);
   if (rc != U2FS_OK) {
     free(*ctx);
+    *ctx = NULL;
     return rc;
   }
 
   rc = encode_b64u(buf, U2FS_CHALLENGE_RAW_LEN, (*ctx)->challenge);
   if (rc != U2FS_OK) {
     free(*ctx);
+    *ctx = NULL;
     return rc;
   }
 
@@ -647,9 +649,11 @@ static u2fs_rc parse_registrationData(const char *registrationData,
   int data_len;
   u2fs_rc rc;
 
-  data = malloc(registrationData_len);
+  data = malloc(registrationData_len + 1);
   if (data == NULL)
     return U2FS_MEMORY_ERROR;
+
+  data[registrationData_len] = '\0';
 
   base64_init_decodestate(&b64);
   data_len =
@@ -666,6 +670,8 @@ static u2fs_rc parse_registrationData(const char *registrationData,
                                attestation_certificate, signature);
 
   free(data);
+  data = NULL;
+
   return rc;
 }
 
@@ -675,6 +681,9 @@ static u2fs_rc decode_clientData(const char *clientData, char **output)
   size_t clientData_len = strlen(clientData);
   char *data;
   u2fs_rc rc = 0;
+
+  if (output == NULL)
+    return U2FS_MEMORY_ERROR;
 
   data = calloc(sizeof(char), clientData_len);
   if (data == NULL)
@@ -690,8 +699,9 @@ static u2fs_rc decode_clientData(const char *clientData, char **output)
   *output = strndup(data, strlen(data));
 
   free(data);
+  data = NULL;
 
-  if (output == NULL || *output == NULL) {
+  if (*output == NULL) {
     fprintf(stderr, "Memory Error\n");
     return U2FS_MEMORY_ERROR;
   }
@@ -725,15 +735,27 @@ u2fs_rc u2fs_registration_verify(u2fs_ctx_t * ctx, const char *response,
   unsigned char c = 0;
   u2fs_X509_t *attestation_certificate;
   u2fs_ECDSA_t *signature;
+  u2fs_EC_KEY_t *key;
   u2fs_rc rc;
 
   if (ctx == NULL || response == NULL || output == NULL)
     return U2FS_MEMORY_ERROR;
 
+  key = NULL;
+  clientData_decoded = NULL;
+  challenge = NULL;
+  origin = NULL;
+  attestation_certificate = NULL;
+  user_public_key = NULL;
+  signature = NULL;
+  registrationData = NULL;
+  clientData = NULL;
+  keyHandle = NULL;
+
   rc = parse_registration_response(response, &registrationData,
                                    &clientData);
   if (rc != U2FS_OK)
-    return rc;
+    goto failure;
 
   if (debug) {
     fprintf(stderr, "registrationData: %s\n", registrationData);
@@ -744,25 +766,24 @@ u2fs_rc u2fs_registration_verify(u2fs_ctx_t * ctx, const char *response,
                               &keyHandle_len, &keyHandle,
                               &attestation_certificate, &signature);
   if (rc != U2FS_OK)
-    return rc;
+    goto failure;
 
-  u2fs_EC_KEY_t *key = NULL;
   rc = extract_EC_KEY_from_X509(attestation_certificate, &key);
 
   if (rc != U2FS_OK)
-    return rc;
+    goto failure;
 
   //TODO Add certificate validation
 
   rc = decode_clientData(clientData, &clientData_decoded);
 
   if (rc != U2FS_OK)
-    return rc;
+    goto failure;
 
   rc = parse_clientData(clientData_decoded, &challenge, &origin);
 
   if (rc != U2FS_OK)
-    return rc;
+    goto failure;
 
   if (strcmp(ctx->challenge, challenge) != 0) {
     rc = U2FS_CHALLENGE_ERROR;
@@ -801,23 +822,21 @@ u2fs_rc u2fs_registration_verify(u2fs_ctx_t * ctx, const char *response,
 
   rc = verify_ECDSA(dgst, U2FS_HASH_LEN, signature, key);
 
-  if (rc != U2FS_OK) {
-    if (rc == U2FS_SIGNATURE_ERROR) {
-      goto failure;
-    } else {
-      return rc;
-    }
-  }
+  if (rc != U2FS_OK)
+    goto failure;
 
   free_sig(signature);
+  signature = NULL;
 
   *output = calloc(1, sizeof(**output));
-  if (*output == NULL)
-    return U2FS_MEMORY_ERROR;
+  if (*output == NULL) {
+    rc = U2FS_MEMORY_ERROR;
+    goto failure;
+  }
 
   rc = encode_b64u(keyHandle, keyHandle_len, buf);
   if (rc != U2FS_OK)
-    return rc;
+    goto failure;
 
   u2fs_EC_KEY_t *key_ptr;
   (*output)->keyHandle = strndup(buf, strlen(buf));
@@ -827,12 +846,14 @@ u2fs_rc u2fs_registration_verify(u2fs_ctx_t * ctx, const char *response,
 
   rc = dump_user_key(key_ptr, &(*output)->publicKey);
   if (rc != U2FS_OK)
-    return rc;
+    goto failure;
 
   if ((*output)->keyHandle == NULL
       || (*output)->user_public_key == NULL
-      || (*output)->attestation_certificate == NULL)
-    return U2FS_MEMORY_ERROR;
+      || (*output)->attestation_certificate == NULL) {
+    rc = U2FS_MEMORY_ERROR;
+    goto failure;
+  }
 
   free_key(key);
   key = NULL;
@@ -864,37 +885,55 @@ u2fs_rc u2fs_registration_verify(u2fs_ctx_t * ctx, const char *response,
   return U2FS_OK;
 
 failure:
-  if (key != NULL) {
+  if (key) {
     free_key(key);
     key = NULL;
   }
 
-  free(clientData_decoded);
-  clientData_decoded = NULL;
+  if (clientData_decoded) {
+    free(clientData_decoded);
+    clientData_decoded = NULL;
+  }
 
-  free(challenge);
-  challenge = NULL;
+  if (challenge) {
+    free(challenge);
+    challenge = NULL;
+  }
 
-  free(origin);
-  origin = NULL;
+  if (origin) {
+    free(origin);
+    origin = NULL;
+  }
 
-  free_cert(attestation_certificate);
-  attestation_certificate = NULL;
+  if (attestation_certificate) {
+    free_cert(attestation_certificate);
+    attestation_certificate = NULL;
+  }
 
-  free(user_public_key);
-  user_public_key = NULL;
+  if (user_public_key) {
+    free(user_public_key);
+    user_public_key = NULL;
+  }
 
-  free_sig(signature);
-  signature = NULL;
+  if (signature) {
+    free_sig(signature);
+    signature = NULL;
+  }
 
-  free(registrationData);
-  registrationData = NULL;
+  if (registrationData) {
+    free(registrationData);
+    registrationData = NULL;
+  }
 
-  free(clientData);
-  clientData = NULL;
+  if (clientData) {
+    free(clientData);
+    clientData = NULL;
+  }
 
-  free(keyHandle);
-  keyHandle = NULL;
+  if (keyHandle) {
+    free(keyHandle);
+    keyHandle = NULL;
+  }
 
   return rc;
 }
@@ -1006,9 +1045,11 @@ parse_signatureData(const char *signatureData, uint8_t * user_presence,
   int data_len;
   u2fs_rc rc;
 
-  data = malloc(signatureData_len);
+  data = malloc(signatureData_len + 1);
   if (data == NULL)
     return U2FS_MEMORY_ERROR;
+
+  data[signatureData_len] = '\0';
 
   base64_init_decodestate(&b64);
   data_len =
@@ -1024,6 +1065,8 @@ parse_signatureData(const char *signatureData, uint8_t * user_presence,
                             signature);
 
   free(data);
+  data = NULL;
+
   return rc;
 }
 
@@ -1095,17 +1138,23 @@ u2fs_rc u2fs_authentication_verify(u2fs_ctx_t * ctx, const char *response,
   uint32_t counter_num;
   uint32_t counter;
   u2fs_ECDSA_t *signature;
-  int i;
-  int mask;
   u2fs_rc rc;
 
   if (ctx == NULL || response == NULL || output == NULL)
     return U2FS_MEMORY_ERROR;
 
+  signatureData = NULL;
+  clientData = NULL;
+  clientData_decoded = NULL;
+  keyHandle = NULL;
+  challenge = NULL;
+  origin = NULL;
+  signature = NULL;
+
   rc = parse_authentication_response(response, &signatureData,
                                      &clientData, &keyHandle);
   if (rc != U2FS_OK)
-    return rc;
+    goto failure;
 
   if (debug) {
     fprintf(stderr, "signatureData: %s\n", signatureData);
@@ -1116,17 +1165,17 @@ u2fs_rc u2fs_authentication_verify(u2fs_ctx_t * ctx, const char *response,
   rc = parse_signatureData(signatureData, &user_presence,
                            &counter, &signature);
   if (rc != U2FS_OK)
-    return rc;
+    goto failure;
 
   rc = decode_clientData(clientData, &clientData_decoded);
 
   if (rc != U2FS_OK)
-    return rc;
+    goto failure;
 
   rc = parse_clientData(clientData_decoded, &challenge, &origin);
 
   if (rc != U2FS_OK)
-    return rc;
+    goto failure;
 
   if (strcmp(ctx->challenge, challenge) != 0) {
     rc = U2FS_CHALLENGE_ERROR;
@@ -1171,8 +1220,10 @@ u2fs_rc u2fs_authentication_verify(u2fs_ctx_t * ctx, const char *response,
   signature = NULL;
 
   *output = calloc(1, sizeof(**output));
-  if (*output == NULL)
-    return U2FS_MEMORY_ERROR;
+  if (*output == NULL) {
+    rc = U2FS_MEMORY_ERROR;
+    goto failure;
+  }
 
   counter_num = 0;
   counter_num |= (counter & 0xFF000000) >> 24;
@@ -1205,26 +1256,40 @@ u2fs_rc u2fs_authentication_verify(u2fs_ctx_t * ctx, const char *response,
   return U2FS_OK;
 
 failure:
-  free(clientData_decoded);
-  clientData_decoded = NULL;
+  if (clientData_decoded) {
+    free(clientData_decoded);
+    clientData_decoded = NULL;
+  }
 
-  free(challenge);
-  challenge = NULL;
+  if (challenge) {
+    free(challenge);
+    challenge = NULL;
+  }
 
-  free(origin);
-  origin = NULL;
+  if (origin) {
+    free(origin);
+    origin = NULL;
+  }
 
-  free_sig(signature);
-  signature = NULL;
+  if (signature) {
+    free_sig(signature);
+    signature = NULL;
+  }
 
-  free(signatureData);
-  signatureData = NULL;
+  if (signatureData) {
+    free(signatureData);
+    signatureData = NULL;
+  }
 
-  free(clientData);
-  clientData = NULL;
+  if (clientData) {
+    free(clientData);
+    clientData = NULL;
+  }
 
-  free(keyHandle);
-  keyHandle = NULL;
+  if (keyHandle) {
+    free(keyHandle);
+    keyHandle = NULL;
+  }
 
   return rc;
 }
