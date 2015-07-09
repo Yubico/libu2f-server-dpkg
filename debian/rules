@@ -8,7 +8,8 @@ override_dh_auto_configure:
 		--disable-silent-rules \
 		--enable-gtk-doc \
 		--enable-gtk-doc-pdf \
-		--enable-gtk-doc-html
+		--enable-gtk-doc-html \
+		--disable-h2a
 
 override_dh_auto_clean:
 	test -f Makefile && dh_auto_clean || true
