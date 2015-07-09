@@ -26,13 +26,13 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 AM_CFLAGS = $(WARN_CFLAGS)
-AM_CPPFLAGS=-I$(srcdir)/.. -I$(builddir)/.. -I$(builddir)/../u2f-server $(LIBSSL_CFLAGS)
+AM_CPPFLAGS = -I$(srcdir)/.. -I$(builddir)/.. -I$(builddir)/../u2f-server
 
 bin_PROGRAMS = u2f-server
 
 u2f_server_SOURCES = u2f-server.c
 u2f_server_SOURCES += cmdline.ggo cmdline.c cmdline.h
-u2f_server_LDADD = ../u2f-server/libu2f-server.la $(LIBSSL_LIBS)
+u2f_server_LDADD = ../u2f-server/libu2f-server.la
 
 cmdline.c cmdline.h: cmdline.ggo Makefile.am
 	gengetopt --no-handle-help --input $^
@@ -40,14 +40,24 @@ cmdline.c cmdline.h: cmdline.ggo Makefile.am
 BUILT_SOURCES = cmdline.c cmdline.h
 MAINTAINERCLEANFILES = $(BUILT_SOURCES)
 
-dist_man_MANS = u2f-server.1
+dist_man_MANS = $(top_srcdir)/man/u2f-server.1
 DISTCLEANFILES = $(dist_man_MANS)
 
-u2f-server.1: $(srcdir)/u2f-server.c $(srcdir)/cmdline.ggo $(top_srcdir)/configure.ac
+$(top_srcdir)/man/u2f-server.1: $(srcdir)/u2f-server.c $(srcdir)/cmdline.ggo $(top_srcdir)/configure.ac
 	$(HELP2MAN) \
-		--output=$@ $(builddir)/u2f-server$(EXEEXT) \
+		--output=$(top_builddir)/man/$@ $(builddir)/u2f-server$(EXEEXT) \
 		--name="Yubico Universal 2nd Factor (U2F) Server Tool" \
 		--no-info
+if ENABLE_H2A
+	$(HELP2ADOC) \
+		-e $(builddir)/u2f-server$(EXEEXT) \
+		--name="Yubico Universal 2nd Factor (U2F) Server Tool" \
+		> $(top_builddir)/man/$@.txt
+endif
+
+clean-local:
+	rm -f $(top_builddir)/man/*.[1-9]
+	rm -f $(top_builddir)/man/*.[1-9].txt
 
 if ENABLE_COV
 AM_CFLAGS += --coverage

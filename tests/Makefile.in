@@ -129,7 +129,8 @@ basic_OBJECTS = basic.$(OBJEXT)
 basic_LDADD = $(LDADD)
 am__DEPENDENCIES_1 =
 basic_DEPENDENCIES = $(top_builddir)/u2f-server/libu2f-server.la \
-	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1)
+	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
+	$(am__DEPENDENCIES_1)
 AM_V_lt = $(am__v_lt_@AM_V@)
 am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
 am__v_lt_0 = --silent
@@ -138,12 +139,14 @@ core_SOURCES = core.c
 core_OBJECTS = core.$(OBJEXT)
 core_LDADD = $(LDADD)
 core_DEPENDENCIES = $(top_builddir)/u2f-server/libu2f-server.la \
-	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1)
+	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
+	$(am__DEPENDENCIES_1)
 openssl_SOURCES = openssl.c
 openssl_OBJECTS = openssl.$(OBJEXT)
 openssl_LDADD = $(LDADD)
 openssl_DEPENDENCIES = $(top_builddir)/u2f-server/libu2f-server.la \
-	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1)
+	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
+	$(am__DEPENDENCIES_1)
 AM_V_P = $(am__v_P_@AM_V@)
 am__v_P_ = $(am__v_P_@AM_DEFAULT_V@)
 am__v_P_0 = false
@@ -439,6 +442,7 @@ GREP = @GREP@
 GTKDOC_CHECK = @GTKDOC_CHECK@
 GTKDOC_MKPDF = @GTKDOC_MKPDF@
 GTKDOC_REBASE = @GTKDOC_REBASE@
+HELP2ADOC = @HELP2ADOC@
 HELP2MAN = @HELP2MAN@
 HTML_DIR = @HTML_DIR@
 INSTALL = @INSTALL@
@@ -448,6 +452,8 @@ INSTALL_SCRIPT = @INSTALL_SCRIPT@
 INSTALL_STRIP_PROGRAM = @INSTALL_STRIP_PROGRAM@
 LD = @LD@
 LDFLAGS = @LDFLAGS@
+LIBCRYPTO_CFLAGS = @LIBCRYPTO_CFLAGS@
+LIBCRYPTO_LIBS = @LIBCRYPTO_LIBS@
 LIBJSON_CFLAGS = @LIBJSON_CFLAGS@
 LIBJSON_LIBS = @LIBJSON_LIBS@
 LIBOBJS = @LIBOBJS@
@@ -545,10 +551,11 @@ top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 AM_CFLAGS = $(WARN_CFLAGS) -DMAKE_CHECK $(am__append_1)
-AM_CPPFLAGS = -I$(srcdir)/.. -I$(builddir)/..  $(LIBSSL_CFLAGS)
+AM_CPPFLAGS = -I$(srcdir)/.. -I$(builddir)/.. $(LIBSSL_CFLAGS) \
+	$(LIBCRYPTO_CFLAGS)
 AM_LDFLAGS = -no-install $(am__append_2)
 LDADD = $(top_builddir)/u2f-server/libu2f-server.la $(CHECK_LIBS) \
-	$(LIBSSL_LIBS)
+	$(LIBSSL_LIBS) $(LIBCRYPTO_LIBS)
 dist_check_SCRIPTS = u2f-server-test.sh
 TESTS = $(check_PROGRAMS) u2f-server-test.sh
 TEST_EXTENSIONS = .sh
