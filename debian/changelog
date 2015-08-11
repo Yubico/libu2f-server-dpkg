@@ -3,6 +3,10 @@ libu2f-server (1.0.1-1) unstable; urgency=medium
   * New upstream release.
     - Closes: #787133.
 
+  [ Simon Josefsson ]
+  * Install libu2f-server.pdf too.  Fixes lintian
+    doc-base-file-references-missing-file.
+
  -- Alessio Di Mauro <alessio@yubico.com>  Thu, 09 Jul 2015 10:53:21 +0200
 
 libu2f-server (1.0.0-1) unstable; urgency=low
