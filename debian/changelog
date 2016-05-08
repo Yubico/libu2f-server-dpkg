@@ -1,3 +1,9 @@
+libu2f-server (1.0.1-2) unstable; urgency=medium
+
+  * Fix dependencies (Closes: 820690).
+
+ --
+
 libu2f-server (1.0.1-1) unstable; urgency=medium
 
   * New upstream release.
