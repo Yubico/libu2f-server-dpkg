@@ -1,8 +1,9 @@
-libu2f-server (1.0.1-2) unstable; urgency=medium
+libu2f-server (1.0.1-1+nmu1) unstable; urgency=medium
 
   * Fix dependencies (Closes: 820690).
+  * Non-maintainer upload.
 
- --
+ -- Nicolas Braud-Santoni <nicolas@braud-santoni.eu>  Thu, 02 Jun 2016 00:06:28 +0200
 
 libu2f-server (1.0.1-1) unstable; urgency=medium
 
