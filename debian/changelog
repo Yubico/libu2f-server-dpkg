@@ -1,9 +1,18 @@
-libu2f-server (1.0.1-1+nmu1) unstable; urgency=medium
+libu2f-server (1.0.1-1.2) unstable; urgency=medium
 
-  * Fix dependencies (Closes: 820690).
   * Non-maintainer upload.
+  * Fix dependencies (Closes: #820690).
+  * Remove copyright lines from LICENSE blocks 
+  * Add gen-orig-source target
 
  -- Nicolas Braud-Santoni <nicolas@braud-santoni.eu>  Thu, 02 Jun 2016 00:06:28 +0200
+
+libu2f-server (1.0.1-1.1) unstable; urgency=medium
+
+  * Non-maintainer upload.
+  * Switch from libjson0-dev to libjson-c-dev (Closes: #815415)
+
+ -- Neil Williams <codehelp@debian.org>  Sun, 21 Feb 2016 11:45:37 +0000
 
 libu2f-server (1.0.1-1) unstable; urgency=medium
 
