@@ -2,6 +2,8 @@
 
 include /usr/share/dpkg/pkg-info.mk
 
+export DEB_BUILD_MAINT_OPTIONS = hardening=+all
+
 %:
 	dh $@ --parallel --with autoreconf
 
@@ -18,10 +20,3 @@ override_dh_auto_clean:
 
 override_dh_compress:
 	dh_compress -Xu2f-server.pdf
-
-
-gen-orig-source:
-	git archive --format=tar.gz                                     \
-		--prefix=$(DEB_SOURCE)-$(DEB_VERSION_UPSTREAM)/         \
-		upstream/$(subst ~,_,$(DEB_VERSION_UPSTREAM))           \
-		-o ../$(DEB_SOURCE)_$(DEB_VERSION_UPSTREAM).orig.tar.gz

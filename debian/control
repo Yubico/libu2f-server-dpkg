@@ -14,9 +14,9 @@ Build-Depends: debhelper (>= 9),
 	       dh-autoreconf,
 	       gtk-doc-tools,
 	       dblatex
-Standards-Version: 3.9.6
+Standards-Version: 3.9.8
 Homepage: https://developers.yubico.com/libu2f-server/
-Vcs-Git: git://github.com/Yubico/libu2f-server-dpkg.git
+Vcs-Git: https://github.com/Yubico/libu2f-server-dpkg.git
 Vcs-Browser: https://github.com/Yubico/libu2f-server-dpkg
 
 Package: libu2f-server0
