@@ -1,3 +1,206 @@
+2018-01-04  Alessio Di Mauro <alessio@yubico.com>
+
+	* NEWS: Version 1.1.0
+
+2018-01-04  Alessio Di Mauro <alessio@yubico.com>
+
+	* configure.ac: Bump AC and LT version number
+
+2018-01-04  Alessio Di Mauro <alessio@yubico.com>
+
+	* Makefile.am, README, configure.ac, gtk-doc/Makefile.am,
+	gtk-doc/gtk-doc.make, gtk-doc/u2f-server-docs.xml, m4/gtk-doc.m4: 
+	Drop gtk-doc We decided to drop gtk-doc since later versions require significant
+	rework for not much gain.
+
+2017-12-18  Alessio Di Mauro <alessio@yubico.com>
+
+	* : commit eea59f260ba2fe71aee911e60068743acf00dc40 Author: Björn
+	Esser <besser82@fedoraproject.org> Date:   Fri Dec 15 11:50:05 2017
+	+0100
+
+2017-10-12  Alessio Di Mauro <alessio@yubico.com>
+
+	* : commit 840550d4841855d468f5a32df72f8cbbc938035a Author: Alex
+	Reid <alex@choosecase.com> Date:   Wed Oct 11 11:10:34 2017 -0400
+
+2017-03-27  Alessio Di Mauro <a-dma@users.noreply.github.com>
+
+	* : Merge pull request #28 from Yubico/autoconf-janitor Janitorial: Autoconf
+
+2017-01-13  Thordur Bjornsson <thorduri@yubico.com>
+
+	* src/Makefile.am: u2f-server: Dont remove the man text file on
+	clean.
+
+2017-01-13  Thordur Bjornsson <thorduri@yubico.com>
+
+	* configure.ac, u2f-server/core.c, u2f-server/version.c: auto, lib:
+	Use AC_USE_SYSTEM_EXTENSIONS.  Rather then defining _GNU_SOURCE or _POSIX_C_SOURCE directly, use
+	the autotools magik and pray to ${DEITY}.  Fix missing header (spotted during -std=c99 sweep).
+
+2017-01-13  Thordur Bjornsson <thorduri@yubico.com>
+
+	* configure.ac: auto: Summary fixups - Emit CFLAGS/CPPFLAGS - Capitalize version
+
+2017-01-13  Thordur Bjornsson <thorduri@yubico.com>
+
+	* configure.ac: auto: Require ac 2.69, nicer AC_INIT
+
+2017-01-13  Thordur Bjornsson <thorduri@yubico.com>
+
+	* src/cmdline.ggo, src/u2f-server.c, u2f-server/openssl.c: lib,
+	u2f-server: Introduce --x509cert.  Dumps the attestation certificate to the provided file PEM
+	formatted.  dumpCert() now emits it as well (under --debug).  Fixes #7
+
+2017-01-13  Thordur Bjornsson <thorduri@users.noreply.github.com>
+
+	* : Merge pull request #25 from Yubico/attestation-cert Make the attestation cert available.
+
+2015-12-17  Michael Larson <larsonm.pdx@gmail.com>
+
+	* configure.ac, tests/core.c, u2f-server/core.c,
+	u2f-server/crypto.h, u2f-server/internal.h, u2f-server/openssl.c,
+	u2f-server/u2f-server.h, u2f-server/u2f-server.map: lib: Introduce
+	u2fs_get_registration_attestation.  `u2fs_reg_res` gains new members (at the end), and we provide an
+	extraction function(s) Introduce dump_x509_cert and additional tests.  Crank the libtool version, and add the new functionality to the map
+	file.
+
+2015-12-17  Michael Larson <larsonm.pdx@gmail.com>
+
+	* u2f-server/core.c: lib: Fix typo
+
+2017-01-12  Thordur Bjornsson <thorduri@yubico.com>
+
+	* README: README: Drop gtk-doc from build/dep blurbs.  Is going to get replaced soon-ish (TM).
+
+2017-01-12  Thordur Bjornsson <thorduri@yubico.com>
+
+	* build-aux/travis: travis: h2a is disabled by default
+
+2017-01-12  Thordur Bjornsson <thorduri@yubico.com>
+
+	* README: README: Formatting
+
+2017-01-12  Thordur Bjornsson <thorduri@yubico.com>
+
+	* configure.ac: auto: Check for help2man/gengetopt, and bail out if
+	not found.  Both are required to build.  While here, if `--enable-tests` passed, check for `check` and if not
+	found, bail out as well.
+
+2017-01-12  Thordur Bjornsson <thorduri@yubico.com>
+
+	* README: README: Update build/dep blurbs.  Now contains deps for Debian/RHEL/macOS, along with build
+	instructions.  Tested on Ubuntu 16.10, Centos 7.2, and OSX 10.11.6.
+
+2017-01-12  Thordur Bjornsson <thorduri@yubico.com>
+
+	* tests/Makefile.am: tests: Add missing LIBCHECK deps
+
+2017-01-12  Thordur Bjornsson <thorduri@yubico.com>
+
+	* README: README: Prefer a license badge to the blurb
+
+2017-01-12  Thordur Bjornsson <thorduri@yubico.com>
+
+	* README: README: Drop Portability blurb
+
+2017-01-12  Thordur Bjornsson <thorduri@yubico.com>
+
+	* README: README: Drop Namespaces blurb
+
+2017-01-12  Thordur Bjornsson <thorduri@yubico.com>
+
+	* BLURB: gc: BLURB
+
+2017-01-12  Thordur Bjornsson <thorduri@users.noreply.github.com>
+
+	* : Merge pull request #22 from Yubico/janitor Janitorial patches
+
+2017-01-11  Thordur Bjornsson <thorduri@yubico.com>
+
+	* .travis.yml, build-aux/travis: travis: Build on OSX.  Move dep installation into the build script.
+
+2017-01-11  Thordur Bjornsson <thorduri@yubico.com>
+
+	* u2f-server/Makefile.am: build: Add missing LIBCRYPTO deps
+
+2017-01-11  Thordur Bjornsson <thorduri@yubico.com>
+
+	* autogen.sh: build: Introduce autogen.sh
+
+2016-12-12  Alessio Di Mauro <alessio@alessiodimauro.com>
+
+	* u2f-server/core.c: minor format fixup
+
+2016-12-12  Alessio Di Mauro <a-dma@users.noreply.github.com>
+
+	* : Merge pull request #21 from
+	krakjoe/memory-errors-in-challenge-json fix memory errors in challenge generation
+
+2016-12-09  Joe Watkins <krakjoe@php.net>
+
+	* u2f-server/core.c: valgrind shows memory errors around this code,
+	because the reference counts of objects are not managed properly
+
+2016-11-21  Alessio Di Mauro <alessio@alessiodimauro.com>
+
+	* README: Update README
+
+2016-11-21  Alessio Di Mauro <a-dma@users.noreply.github.com>
+
+	* : Merge pull request #20 from gktrk/optional_tests Make tests with CHECK optional at configure time
+
+2016-09-12  Klas Lindfors <klas@yubico.com>
+
+	* src/Makefile.am: add order-only dep on executable for u2f-server.1
+
+2016-05-06  Alessio Di Mauro <alessio@yubico.com>
+
+	* configure.ac: Turn h2a off by default Make life easier to the user while building and have help2adoc be
+	off by default since it is a non-standard package.  Closes #17.
+
+2016-05-06  Alessio Di Mauro <alessio@yubico.com>
+
+	* README: Add gengetop to README Gengetopt is required when building from git. Mention it in the
+	README.  Closes #16.
+
+2016-05-06  Alessio Di Mauro <alessio@yubico.com>
+
+	* configure.ac: Print a message if CHECK is not installed The default action for autconf is to quit with an error when a
+	package is missing. Warn the user and continue execution instead.  Closes #15.
+
+2015-12-24  Alessio Di Mauro <alessio@yubico.com>
+
+	* u2f-server/core.c, u2f-server/internal.h: Remove unnecessary
+	additional representation of the public key.
+
+2015-12-22  Alessio Di Mauro <alessio@yubico.com>
+
+	* man/u2f-server.1.txt: Bump man version as well.
+
+2015-12-18  Alessio Di Mauro <a-dma@users.noreply.github.com>
+
+	* : Merge pull request #12 from
+	larsonmpdx/add-initially-setting-result-nulls-to-verify-functions Set result of verify() functions to null.
+
+2015-12-17  Michael Larson <larsonm.pdx@gmail.com>
+
+	* u2f-server/core.c: set result of verify() functions to null
+
+2015-12-17  Michael Larson <larsonm.pdx@gmail.com>
+
+	* u2f-server/core.c: base64 is 75% efficient (4 characters encode 3
+	bytes)
+
+2015-11-12  Alessio Di Mauro <a-dma@users.noreply.github.com>
+
+	* : Merge pull request #10 from Trundle/fix_typo Fix typo
+
+2015-07-09  Alessio Di Mauro <alessio@yubico.com>
+
+	* NEWS, configure.ac: Bump versions.
+
 2015-07-08  Alessio Di Mauro <alessio@yubico.com>
 
 	* NEWS: Version 1.0.1.
@@ -152,7 +355,7 @@
 	configure.ac, src/Makefile.am, u2f-server/Makefile.am: add coverage
 	report and let travis report it to coveralls
 
-2014-12-01  Henrik Stråth <minisu@users.noreply.github.com>
+2014-12-01  Henrik Str�th <minisu@users.noreply.github.com>
 
 	* NEWS: Update NEWS
 
@@ -166,7 +369,7 @@
 
 2014-11-25  Alessio Di Mauro <alessio@yubico.com>
 
-	* doc/MakeRelease.adoc, doc/Make_Release.adoc: Renamed to improve
+	* doc/{MakeRelease.adoc => Make_Release.adoc}: Renamed to improve
 	rendering on devyco.
 
 2014-11-25  Alessio Di Mauro <alessio@yubico.com>
@@ -209,7 +412,7 @@
 
 2014-11-25  Alessio Di Mauro <alessio@yubico.com>
 
-	* tests/Makefile.am, tests/u2f-server-test.sh, tests/u2f-server.sh: 
+	* tests/Makefile.am, tests/{u2f-server.sh => u2f-server-test.sh}: 
 	Renamed u2f-server test script.  Fixed distcheck.
 
 2014-11-24  Alessio Di Mauro <alessio@yubico.com>
