@@ -25,26 +25,39 @@
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-AC_INIT([libu2f-server], [1.0.1], [yubico-devel@googlegroups.com])
+AC_PREQ([2.69])
+
+AC_INIT([libu2f-server], [1.1.0],
+  [https://github.com/Yubico/libu2f-server/issues],
+  [libu2f-server],
+  [https://developers.yubico.com/libu2f-server])
+
 AC_CONFIG_MACRO_DIR([m4])
 AC_CONFIG_AUX_DIR([build-aux])
 
 # http://www.gnu.org/s/libtool/manual/html_node/Updating-version-info.html
-AC_SUBST(LT_CURRENT, 0)
-AC_SUBST(LT_REVISION, 3)
-AC_SUBST(LT_AGE, 0)
+AC_SUBST(LT_CURRENT, 1)
+AC_SUBST(LT_REVISION, 0)
+AC_SUBST(LT_AGE, 1)
 
 AM_INIT_AUTOMAKE([gnits dist-xz no-dist-gzip std-options -Wall])
 AM_SILENT_RULES([yes])
 AC_PROG_CC
+AC_USE_SYSTEM_EXTENSIONS
 
 m4_ifdef([AM_PROG_AR], [AM_PROG_AR])
 
 LT_INIT([win32-dll])
 
-GTK_DOC_CHECK(1.1)
-AM_MISSING_PROG(HELP2MAN, help2man, $missing_dir)
 AM_MISSING_PROG(HELP2ADOC, help2adoc, $missing_dir)
+AM_MISSING_PROG(HELP2MAN, help2man, $missing_dir)
+if ! which help2man >/dev/null ; then
+   AC_MSG_ERROR([help2man missing])
+fi
+if ! which gengetopt >/dev/null ; then
+   AC_MSG_ERROR([gengetopt missing])
+fi
+
 gl_LD_VERSION_SCRIPT
 
 PKG_CHECK_MODULES([LIBJSON], [json-c], [], [
@@ -63,7 +76,16 @@ PKG_CHECK_MODULES([LIBSSL], [libssl], [], [])
 
 PKG_CHECK_MODULES([LIBCRYPTO], [libcrypto], [], [])
 
-PKG_CHECK_MODULES([CHECK], [check], [], [])
+AC_ARG_ENABLE([tests],
+              [AS_HELP_STRING([--enable-tests],
+                              [use check to run the unit tests])],
+                              [enable_tests=$enableval],
+                              [enable_tests=no])
+AM_CONDITIONAL([ENABLE_TESTS],[test '!' "$enable_tests" = no])
+if test '!' "$enable_tests" = no; then
+  PKG_CHECK_MODULES([CHECK], [check], [], [AC_MSG_ERROR(`check` not found)])
+fi
+
 
 AC_ARG_ENABLE([coverage],
               [AS_HELP_STRING([--enable-coverage],
@@ -76,7 +98,7 @@ AC_ARG_ENABLE([h2a],
               [AS_HELP_STRING([--enable-h2a],
                               [generate asciidoc manpages])],
                               [enable_h2a=$enableval],
-                              [enable_h2a=yes])
+                              [enable_h2a=no])
 AM_CONDITIONAL([ENABLE_H2A],[test '!' "$enable_h2a" = no])
 
 AC_ARG_ENABLE([gcc-warnings],
@@ -121,23 +143,28 @@ AC_SUBST([U2FS_VERSION_NUMBER],
 
 AC_CONFIG_FILES([
   Makefile
-  gtk-doc/Makefile
   src/Makefile
-  tests/Makefile
   u2f-server/Makefile
   u2f-server/u2f-server-version.h
   u2f-server/u2f-server.pc
 ])
+if test '!' "$enable_tests" = no; then
+  AC_CONFIG_FILES([
+    tests/Makefile
+  ])
+fi
 AC_OUTPUT
 
 AC_MSG_NOTICE([summary of build options:
 
-  version:          ${VERSION} shared $LT_CURRENT:$LT_REVISION:$LT_AGE major $U2FS_VERSION_MAJOR minor $U2FS_VERSION_MINOR patch $U2FS_VERSION_PATCH number $U2FS_VERSION_NUMBER
+  Version:          ${VERSION} shared $LT_CURRENT:$LT_REVISION:$LT_AGE major $U2FS_VERSION_MAJOR minor $U2FS_VERSION_MINOR patch $U2FS_VERSION_PATCH number $U2FS_VERSION_NUMBER
   Host type:        ${host}
   Install prefix:   ${prefix}
   Compiler:         ${CC}
   Shared library:   ${enable_shared}
   Static library:   ${enable_static}
+  CFLAGS:           ${CFLAGS}
+  CPPFLAGS:         ${CPPFLAGS}
   JSON CFLAGS:      $LIBJSON_CFLAGS
   JSON LIBS:        $LIBJSON_LIBS
   OPENSSL CFLAGS:   $LIBSSL_CFLAGS

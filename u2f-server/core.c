@@ -29,6 +29,7 @@
 
 #include "internal.h"
 
+#include <string.h>
 #include <unistd.h>
 #include <json.h>
 #include "crypto.h"
@@ -48,7 +49,7 @@ static u2fs_rc encode_b64u(const char *data, size_t data_len, char *output)
   base64_encodestate b64;
   int cnt;
 
-  if (data_len > _B64_BUFSIZE || output == NULL)
+  if ((data_len * 4) >= (_B64_BUFSIZE * 3) || output == NULL)	//base64 is 75% efficient (4 characters encode 3 bytes)
     return U2FS_MEMORY_ERROR;
 
   base64_init_encodestate(&b64);
@@ -130,6 +131,14 @@ void u2fs_free_reg_res(u2fs_reg_res_t * result)
     if (result->keyHandle) {
       free(result->keyHandle);
       result->keyHandle = NULL;
+    }
+    if (result->publicKey) {
+      free(result->publicKey);
+      result->publicKey = NULL;
+    }
+    if (result->attestation_certificate_PEM) {
+      free(result->attestation_certificate_PEM);
+      result->attestation_certificate_PEM = NULL;
     }
     if (result->user_public_key) {
       free_key(result->user_public_key);
@@ -248,7 +257,7 @@ u2fs_set_publicKey(u2fs_ctx_t * ctx, const unsigned char *publicKey)
  * @result: a registration result obtained from u2fs_registration_verify()
  *
  * Get the Base64 keyHandle obtained during the U2F registration
- * operation.  The memory is allocate by the library, and must not be
+ * operation.  The memory is allocated by the library, and must not be
  * deallocated by the caller.
  *
  * Returns: On success the pointer to the buffer containing the keyHandle
@@ -283,6 +292,25 @@ const char *u2fs_get_registration_publicKey(u2fs_reg_res_t * result)
 }
 
 /**
+ * u2fs_get_registration_attestation:
+ * @result: a registration result obtained from u2fs_registration_verify()
+ *
+ * Extract the X509 attestation certificate (PEM format) obtained during the U2F
+ * registration operation.  The memory is allocated by the library,
+ * and must not be deallocated by the caller.
+ *
+ * Returns: On success the pointer to the buffer containing the attestation
+ * certificate is returned, and on errors NULL.
+ */
+const char *u2fs_get_registration_attestation(u2fs_reg_res_t * result)
+{
+  if (result == NULL)
+    return NULL;
+
+  return (void*)result->attestation_certificate_PEM;
+}
+
+/**
  * u2fs_get_authentication_result:
  * @result: an authentication result obtained from u2fs_authentication_verify()
  * @verified: output parameter for the authentication result
@@ -294,13 +322,13 @@ const char *u2fs_get_registration_publicKey(u2fs_reg_res_t * result)
  * will be ignored.
  *
  * Returns: On success #U2FS_OK is returned, and on errors a #u2fs_rc error code.
- * The value @verified is set to #U2FS_OK on a successful authenticaiton, and to 0 otherwise
+ * The value @verified is set to #U2FS_OK on a successful authentication, and to 0 otherwise
  * @counter is filled with the value of the counter provided by the token.
  * A @user_presence value of 1 will determine the actual presence
  * of the user (yubikey touched) during the authentication.
  */
 u2fs_rc u2fs_get_authentication_result(u2fs_auth_res_t * result,
-                                       int *verified,
+                                       u2fs_rc *verified,
                                        uint32_t * counter,
                                        uint8_t * user_presence)
 {
@@ -381,6 +409,7 @@ static int registration_challenge_json(const char *challenge,
   struct json_object *json_version = NULL;
   struct json_object *json_appid = NULL;
   struct json_object *json_output = NULL;
+  const char *json_string = NULL;
 
   rc = U2FS_JSON_ERROR;
 
@@ -398,21 +427,23 @@ static int registration_challenge_json(const char *challenge,
   if (json_output == NULL)
     goto done;
 
-  json_object_object_add(json_output, "challenge", json_challenge);
-  json_object_object_add(json_output, "version", json_version);
-  json_object_object_add(json_output, "appId", json_appid);
+  json_object_object_add(json_output, "challenge", json_object_get(json_challenge));
+  json_object_object_add(json_output, "version", json_object_get(json_version));
+  json_object_object_add(json_output, "appId", json_object_get(json_appid));
 
-  *output = strdup(json_object_to_json_string(json_output));
-  if (*output == NULL)
+  json_string = json_object_to_json_string(json_output);
+  if (json_string == NULL)
+    rc = U2FS_JSON_ERROR;
+  else if ((*output = strdup(json_string)) == NULL)
     rc = U2FS_MEMORY_ERROR;
   else
     rc = U2FS_OK;
 
 done:
-  json_object_put(json_challenge);
-  json_object_put(json_version);
-  json_object_put(json_appid);
-  json_object_put(json_output);
+    json_object_put(json_output);
+    json_object_put(json_challenge);
+    json_object_put(json_version);
+    json_object_put(json_appid);
 
   return rc;
 }
@@ -751,6 +782,7 @@ u2fs_rc u2fs_registration_verify(u2fs_ctx_t * ctx, const char *response,
   registrationData = NULL;
   clientData = NULL;
   keyHandle = NULL;
+  *output = NULL;
 
   rc = parse_registration_response(response, &registrationData,
                                    &clientData);
@@ -840,16 +872,23 @@ u2fs_rc u2fs_registration_verify(u2fs_ctx_t * ctx, const char *response,
 
   u2fs_EC_KEY_t *key_ptr;
   (*output)->keyHandle = strndup(buf, strlen(buf));
-  decode_user_key(user_public_key, &key_ptr);
-  (*output)->user_public_key = key_ptr;
+
+  rc = decode_user_key(user_public_key, &key_ptr);
+  if (rc != U2FS_OK)
+    goto failure;
+
   (*output)->attestation_certificate = dup_cert(attestation_certificate);
 
   rc = dump_user_key(key_ptr, &(*output)->publicKey);
   if (rc != U2FS_OK)
     goto failure;
 
+  rc = dump_X509_cert(attestation_certificate, &(*output)->attestation_certificate_PEM);
+  if (rc != U2FS_OK)
+    goto failure;
+
   if ((*output)->keyHandle == NULL
-      || (*output)->user_public_key == NULL
+      || (*output)->publicKey == NULL
       || (*output)->attestation_certificate == NULL) {
     rc = U2FS_MEMORY_ERROR;
     goto failure;
@@ -948,6 +987,7 @@ static int authentication_challenge_json(const char *challenge,
   struct json_object *json_version = NULL;
   struct json_object *json_appid = NULL;
   struct json_object *json_output = NULL;
+  const char *json_string = NULL;
 
   rc = U2FS_JSON_ERROR;
 
@@ -968,23 +1008,26 @@ static int authentication_challenge_json(const char *challenge,
   if (json_output == NULL)
     goto done;
 
-  json_object_object_add(json_output, "keyHandle", json_key);
-  json_object_object_add(json_output, "version", json_version);
-  json_object_object_add(json_output, "challenge", json_challenge);
-  json_object_object_add(json_output, "appId", json_appid);
+  json_object_object_add(json_output, "keyHandle", json_object_get(json_key));
+  json_object_object_add(json_output, "version", json_object_get(json_version));
+  json_object_object_add(json_output, "challenge", json_object_get(json_challenge));
+  json_object_object_add(json_output, "appId", json_object_get(json_appid));
 
-  *output = strdup(json_object_to_json_string(json_output));
-  if (*output == NULL)
+  json_string = json_object_to_json_string(json_output);
+
+  if (json_string == NULL)
+    rc = U2FS_JSON_ERROR;
+  else if ((*output = strdup(json_string)) == NULL)
     rc = U2FS_MEMORY_ERROR;
   else
     rc = U2FS_OK;
 
 done:
-  json_object_put(json_challenge);
-  json_object_put(json_key);
-  json_object_put(json_version);
-  json_object_put(json_appid);
-  json_object_put(json_output);
+    json_object_put(json_output);
+    json_object_put(json_challenge);
+    json_object_put(json_key);
+    json_object_put(json_version);
+    json_object_put(json_appid);
 
   return rc;
 }
@@ -1150,6 +1193,7 @@ u2fs_rc u2fs_authentication_verify(u2fs_ctx_t * ctx, const char *response,
   challenge = NULL;
   origin = NULL;
   signature = NULL;
+  *output = NULL;
 
   rc = parse_authentication_response(response, &signatureData,
                                      &clientData, &keyHandle);
