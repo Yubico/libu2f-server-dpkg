@@ -10,13 +10,7 @@ export DEB_BUILD_MAINT_OPTIONS = hardening=+all
 override_dh_auto_configure:
 	dh_auto_configure -- \
 		--disable-silent-rules \
-		--enable-gtk-doc \
-		--enable-gtk-doc-pdf \
-		--enable-gtk-doc-html \
 		--disable-h2a
 
 override_dh_auto_clean:
 	test -f Makefile && dh_auto_clean || true
-
-override_dh_compress:
-	dh_compress -Xu2f-server.pdf

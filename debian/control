@@ -12,7 +12,6 @@ Build-Depends: debhelper (>= 9),
 	       gengetopt,
 	       help2man,
 	       dh-autoreconf,
-	       gtk-doc-tools,
 	       dblatex
 Standards-Version: 3.9.8
 Homepage: https://developers.yubico.com/libu2f-server/
